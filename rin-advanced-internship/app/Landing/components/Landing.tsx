@@ -4,9 +4,9 @@ import landingimg from "../../../public/assets/landing.png"
 export default function LandingComponent() {
   return (
     <section id="landing">
-      <div className="container">
-        <div className="row">
-          <div className="flex">
+      <div className="container mx-auto">
+        <div className="row ">
+          <div className="flex ">
             <div className="w-max">
               <div className="text-[#032b41] font-bold text-4xl mb-6  ">
                 Gain more knowledge <br className="remove--tablet" />
