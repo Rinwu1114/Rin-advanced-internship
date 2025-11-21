@@ -4,7 +4,7 @@ export default function Reviews() {
   return (
     <section id="reviews">
       <div className="row">
-        <div className="container">
+        <div className="container mx-auto">
           <div className="text-3xl text-[#032b41] text-center mb-8 font-bold">What our members say</div>
           <div className="max-w-[600px] mx-auto">
             <div className="review bg-[#fff3d7] p-4 mb-8 rounded-sm font-light">
