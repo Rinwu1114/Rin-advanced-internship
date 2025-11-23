@@ -4,7 +4,8 @@ export default function Footer() {
         <section id="footer" className="bg-[rgb(241, 246, 244)]">
       <div className="container mx-auto">
         <div className="row">
-          <div className="realitive flex justify-between text-sm mt-8 mx-auto mb-16">
+          <div className="realitive flex flex-col justify-between text-sm mt-8 mx-auto mb-16 gap-8
+          md:flex-row md:gap-0">
             <div className="z-1">
               <div className="mb-4 text-lg text-[#032b41] font-semibold">Actions</div>
               <div>
@@ -84,14 +85,3 @@ export default function Footer() {
     </section>
     )
 }
-
-// .footer__copyright--wrapper {
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-// }
-
-// .footer__copyright {
-//   color: #032b41;
-//   font-weight: 500;
-// }
