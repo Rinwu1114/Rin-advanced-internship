@@ -31,14 +31,18 @@ export default function Stats() {
 
   return (
     <section id="stats">
-      <div className="container mx-auto">
+      <div className="w-full mx-auto pt-0 pb-10">
         <div className="row">
-          <div className="flex gap-20 mb-28 last:mb-0">
+
+          <div
+            className="flex flex-col gap-8 md:gap-20 mb-8 md:mb-28 last:mb-0
+          md:flex-row"
+          >
             <div className="w-full flex flex-col justify-center">
               {heading1.map((heading1, index) => (
                 <div
                   key={index}
-                  className={`text-[32px] font-medium mb-4 last:mb-0
+                  className={` text-2xl md:text-[32px] font-medium mb-4 last:mb-0
                         ${
                           index === active
                             ? "text-[#2bda7cff]"
@@ -60,7 +64,7 @@ export default function Stats() {
                 >
                   93%
                 </div>
-                <div className="text-xl font-light text-[#394547]">
+                <div className="md:text-xl text-base font-light text-[#394547]">
                   of Summarist members <b>significantly increase</b> reading
                   frequency.
                 </div>
@@ -72,7 +76,7 @@ export default function Stats() {
                 >
                   96%
                 </div>
-                <div className="text-xl font-light text-[#394547]">
+                <div className="md:text-xl text-base font-light text-[#394547]">
                   of Summarist members <b>establish better</b> habits.
                 </div>
               </div>
@@ -83,16 +87,20 @@ export default function Stats() {
                 >
                   90%
                 </div>
-                <div className="text-xl font-light text-[#394547]">
+                <div className="md:text-xl text-base font-light text-[#394547]">
                   have made <b>significant positive</b> change to their lives.
                 </div>
               </div>
             </div>
           </div>
-          <div className="flex gap-20 mb-28 last:mb-0">
+          <div
+            className="flex flex-col gap-8 md:gap-20 mb-8 md:mb-28 last:mb-0
+          md:flex-row"
+          >
             <div
               className="w-full flex flex-col justify-center gap-6 bg-[#f1f6f4]
-              py-10 px-6 items-end"
+              py-10 px-6 items-end order-1
+              md:order-0"
             >
               <div className="flex gap-4">
                 <div
@@ -101,7 +109,7 @@ export default function Stats() {
                 >
                   91%
                 </div>
-                <div className="text-xl font-light text-[#394547]">
+                <div className="md:text-xl text-base font-light text-[#394547]">
                   of Summarist members <b>report feeling more productive</b>{" "}
                   after incorporating the service into their daily routine.
                 </div>
@@ -113,7 +121,7 @@ export default function Stats() {
                 >
                   94%
                 </div>
-                <div className="text-xl font-light text-[#394547]">
+                <div className="md:text-xl text-base font-light text-[#394547]">
                   of Summarist members have <b>noticed an improvement</b> in
                   their overall comprehension and retention of information.
                 </div>
@@ -125,28 +133,30 @@ export default function Stats() {
                 >
                   88%
                 </div>
-                <div className="text-xl font-light text-[#394547]">
+                <div className="md:text-xl text-base font-light text-[#394547]">
                   of Summarist members <b>feel more informed</b> about current
                   events and industry trends since using the platform.
                 </div>
               </div>
             </div>
-            <div className="w-full flex flex-col justify-center items-end">
-              <div className="w-full flex flex-col justify-center">
-              {heading2.map((heading2, index) => (
-                <div
-                  key={index}
-                  className={`text-[32px] font-medium mb-4 last:mb-0
+            <div className="w-full flex flex-col justify-center gap-8 md:gap-5 mb-28 last:mb-0
+          md:flex-row">
+              <div className="w-full flex flex-col justify-center items-start md:items-end text-right
+              ">
+                {heading2.map((heading2, index) => (
+                  <div
+                    key={index}
+                    className={`text-2xl md:text-[32px] font-medium mb-4 last:mb-0
                         ${
                           index === active
                             ? "text-[#2bda7cff]"
                             : "text-[#6b757b]"
                         }`}
-                >
-                  {heading2}
-                </div>
-              ))}
-            </div>
+                  >
+                    {heading2}
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -155,6 +165,4 @@ export default function Stats() {
   );
 }
 
-// .statistics__heading--active {
-//   color: #2bda7cff;
-// }
+
