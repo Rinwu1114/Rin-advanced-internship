@@ -1,7 +1,11 @@
 import Image from "next/image";
 import landingimg from "../../../public/assets/landing.png"
+import LoginButton from "./LoginButton";
 
 export default function LandingComponent() {
+
+
+
   return (
     <section id="landing">
       <div className="container mx-auto">
@@ -21,7 +25,7 @@ export default function LandingComponent() {
                 <br className="hidden md:block" />
                 and even people who don’t like to read.
               </div>
-              <button className="mx-auto md:m-0 btn home__cta--btn">Login</button>
+              <LoginButton />
             </div>
             <figure className="w-full flex justify-end hidden
             md:flex">
