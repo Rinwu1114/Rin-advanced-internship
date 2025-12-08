@@ -3,12 +3,12 @@ import Features from "./components/Features";
 import Stats from "./components/Stats";
 import Reviews from "./components/Reviews";
 import Numbers from "./components/Numbers";
-import Login from "./components/Login";
+import PopUp from "./components/PopUp";
 
 export default function Landing() {
   return (
     <>
-      <Login />
+      <PopUp />
       <LandingComponent />
       <Features />
       <Stats />
