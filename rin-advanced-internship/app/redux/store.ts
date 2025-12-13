@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'
 import loginPopUpReducer from './slices/loginSlice';
+import activeReducer from './slices/activeSlice';
 
 export const makeStore = () => {
     return configureStore({
         reducer: {
-            loginPopUp: loginPopUpReducer
+            loginPopUp: loginPopUpReducer,
+            ActiveTab: activeReducer,
         },
     });
 }
