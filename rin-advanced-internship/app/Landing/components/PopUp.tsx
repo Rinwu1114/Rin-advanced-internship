@@ -1,7 +1,7 @@
 "use client";
 
 import { useSelector, useDispatch } from "react-redux";
-import { closePopUp, switchMode } from "@/app/redux/slices/loginSlice";
+import { closePopUp } from "@/app/redux/slices/loginSlice";
 import { RootState } from "../../redux/store";
 import { HiOutlineXMark } from "react-icons/hi2";
 import Signup from "./Signup";
