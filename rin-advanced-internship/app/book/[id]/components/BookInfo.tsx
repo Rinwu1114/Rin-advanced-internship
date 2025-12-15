@@ -3,6 +3,7 @@ import { GoClock } from "react-icons/go";
 import { IoMicOutline } from "react-icons/io5";
 import { HiOutlineLightBulb } from "react-icons/hi";
 import { CiBookmark } from "react-icons/ci";
+import BookButtons from "./BookButtons";
 
 export default  function BookInfo( {bookInfo}: {bookInfo: any} ) {
      console.log('BookInfo props:', bookInfo); 
@@ -36,7 +37,7 @@ export default  function BookInfo( {bookInfo}: {bookInfo: any} ) {
                     </div>
                 </div>
             </div>
-            <div className="book__btn--wrapper flex gap-4 mb-6">SERVERSIDE BUTTONS</div>
+            <div className="book__btn--wrapper flex gap-4"><BookButtons bookId={bookInfo.id} /></div>
             <div className="bookmark flex items-center gap-2 mb-10 cursor-pointer text-lg 
             text-[#0365f2] font-medium transition duration-150 hover:text-[#044298]">
                 <div className="bookmark__icon flex"><CiBookmark className="w-5 h-5" /></div>
