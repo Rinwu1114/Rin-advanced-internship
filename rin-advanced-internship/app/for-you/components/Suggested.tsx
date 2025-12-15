@@ -11,7 +11,6 @@ async function fetchSuggested() {
 
 export default async function Suggested() {
   const books = await fetchSuggested();
-  console.log(books);
 
   return (
     <div>
