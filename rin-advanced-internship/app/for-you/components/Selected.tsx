@@ -11,12 +11,9 @@ export default async function selected () {
     const bookInfo = book[0];
     console.log(bookInfo);
     return (
-    <>
-    <div className=" max-w-[1070px] w-full px-6 mx-auto">
-        <div className="container">
-            <div className="for-you__wrapper">
+    <div>
                 <div className="for-you__title text-2xl font-bold text-[#032b41] mb-4">Selected just for you </div>
-                {/* <audio src=""></audio> */}
+                <audio src={bookInfo.audioId}></audio>
                 <Link href={`/book/${bookInfo.id}`}
                 className="xl:flex-row md:flex-row flex flex-col justify-between xl:w-2/3 w-full p-6
                 mb-6 bg-[#fbefd6] gap-6 
@@ -46,9 +43,7 @@ export default async function selected () {
                     </div>
                     </div>
                 </Link>
-            </div>
+            
         </div>
-    </div>
-    </>
  )
 }
