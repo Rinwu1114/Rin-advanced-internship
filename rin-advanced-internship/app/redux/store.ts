@@ -1,12 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit'
 import loginPopUpReducer from './slices/loginSlice';
 import activeReducer from './slices/activeSlice';
+import audio from './slices/audioPlayerSlice'
 
 export const makeStore = () => {
     return configureStore({
         reducer: {
             loginPopUp: loginPopUpReducer,
             ActiveTab: activeReducer,
+            AudioBookPlayer: audio 
         },
     });
 }
