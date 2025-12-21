@@ -1,31 +1,54 @@
+'use client';
 
-export default function AudioPlayer( {playerInfo}: {playerInfo: any} ) {
-    return(
-        <div className="audio__wrapper">
-            <audio src={playerInfo.audioLink}></audio>
-            <div className="audio__track--wrapper">
-                <figure className="audio__track--img-mask">
-                    <figure className="book__img--wrapper">
-                        <img src={playerInfo.imageLink} alt="" className="book__img" />
-                    </figure>
-                </figure>
-                <div className="audio__track--details-wrapper">
-                    <div className="track__title">{playerInfo.title}</div>
-                    <div className="track__author">{playerInfo.author}</div>
-                </div>
-            </div>
-            <div className="audio__controls--wrapper">
-                <div className="audio__controls">
-                    <button className="controls__btn"></button>
-                    <button className="controls__btn--play"></button>
-                    <button className="controls__btn"></button>
-                </div>
-            </div>
-            <div className="audio__progress--wrapper">
-                <div className="audio__time"></div>
-                <input type="range" className="audio__progress--bar" />
-                <div className="audio__time"></div>
-            </div>
-        </div>
-    )
+import { useEffect, useRef } from "react";
+import { useDispatch, UseDispatch, useSelector } from "react-redux";
+import { RootState } from "@/app/redux/store";
+import { togglePlayPause, stop } from "@/app/redux/slices/audioPlayerSlice";
+import TrackInfo from "./TrackInfo";
+import AudioControls from "./Controls";
+import ProgressBar from "./ProgressBar";
+
+export default function AudioPlayer({ playerInfo }: { playerInfo: any }) {
+  
+    const audioRef = useRef<HTMLAudioElement>(null)
+    const dispatch = useDispatch()
+    const { isPlaying } = useSelector((state: RootState) => state.AudioBookPlayer)
+  //play and pause
+    useEffect(() => {
+        if (!audioRef.current) return;
+
+        if(isPlaying) {
+            audioRef.current.play().catch(error => {
+                console.error(`Play failed:`, error);
+                dispatch(togglePlayPause())
+            })
+        } else {
+            audioRef.current.pause()
+        }
+    }, [isPlaying, dispatch])
+
+    // end audio
+    useEffect(() => {
+        dispatch(stop())
+    })
+
+    //update progress
+
+    useEffect(() => {
+        if (!Audio) return;
+        
+        
+    })
+
+    return (
+    <div
+      className="audio__wrapper w-full h-20 mt-auto flex items-center
+        justify-between bg-[#042330] px-10 fixed bottom-0 left-0 z-80"
+    >
+      <audio src={playerInfo.audioLink}></audio>
+      <TrackInfo playerInfo={playerInfo} />
+      <AudioControls playerInfo={playerInfo} />
+      <ProgressBar playerInfo = {playerInfo} />
+    </div>
+  );
 }
