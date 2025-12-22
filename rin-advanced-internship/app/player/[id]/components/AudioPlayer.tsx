@@ -35,9 +35,10 @@ export default function AudioPlayer({ playerInfo }: { playerInfo: any }) {
     //update progress
 
     useEffect(() => {
-        if (!Audio) return;
+      const audio = audioRef.current
+        if (!audio) return;
         //test
-
+        
 
     })
 
