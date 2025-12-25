@@ -22,6 +22,10 @@ export const AudioSlice = createSlice({
       state.currentTime = action.payload;
     },
     updateProgress: (state, action: PayloadAction<number>) => {
+      state.currentTime = action.payload;
+    },
+    setDuration: (state, action: PayloadAction<number>) => {
+      state.duration = action.payload;
     },
     skipForward: (state, action: PayloadAction<number>) => {
       const sec = action.payload ?? 10;
@@ -37,9 +41,6 @@ export const AudioSlice = createSlice({
       const sec = action.payload ?? 10; 
       const newTime = state.currentTime - sec;
       state.currentTime = Math.max(0, newTime);
-    },
-    setDuration: (state, action: PayloadAction<number>) => {
-      state.duration = action.payload;
     },
     stop: (state) => {
         state.isPlaying = false;
