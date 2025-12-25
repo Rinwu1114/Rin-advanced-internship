@@ -6,7 +6,6 @@ import { CiBookmark } from "react-icons/ci";
 import BookButtons from "./BookButtons";
 
 export default  function BookInfo( {bookInfo}: {bookInfo: any} ) {
-     console.log('BookInfo props:', bookInfo); 
     return (
     <div className="book__wrapper flex max-[1000px]:gap-4 gap-8 max-[1000px]:flex-col flex-row">
         <div className="book w-full max-[1000px]:order-1">

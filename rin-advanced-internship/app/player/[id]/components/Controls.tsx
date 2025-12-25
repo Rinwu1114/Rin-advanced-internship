@@ -7,8 +7,6 @@ import { FaCirclePlay } from "react-icons/fa6";
 import { FaPauseCircle } from "react-icons/fa";
 import { MdOutlineReplay10 } from "react-icons/md";
 import { MdForward10 } from "react-icons/md";
-import { useRef } from "react";
-
 
 export default function AudioControls() {
   const dispatch = useDispatch();
@@ -19,7 +17,7 @@ export default function AudioControls() {
     dispatch(togglePlayPause())
   }
   const handleForward = () => {
-  dispatch(skipForward(10)); // Uses default 10
+  dispatch(skipForward(10)); 
 };
   const handleRewind = () => {
     dispatch(Rewind(10))
