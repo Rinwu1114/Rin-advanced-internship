@@ -21,18 +21,22 @@ export const AudioSlice = createSlice({
     seekTo: (state, action: PayloadAction<number>) => {
       state.currentTime = action.payload;
     },
+    updateProgress: (state, action: PayloadAction<number>) => {
+    },
     skipForward: (state, action: PayloadAction<number>) => {
-      const sec = action.payload ?? 10; //default skip 10 sec
-      const newTime = state.currentTime + sec;
-      state.currentTime = Math.min(newTime, state.duration);
+      const sec = action.payload ?? 10;
+      let newTime = state.currentTime + sec;
+      if (state.duration > 0){
+        newTime = Math.min(newTime, state.duration)
+      }
+      state.currentTime = Math.max(0, newTime);
+       state.currentTime = newTime;
+
     },
     Rewind: (state, action: PayloadAction<number>) => {
-      const sec = action.payload ?? 10; //default rewind 10 sec
+      const sec = action.payload ?? 10; 
       const newTime = state.currentTime - sec;
       state.currentTime = Math.max(0, newTime);
-    },
-    updateProgress: (state, action: PayloadAction<number>) => {
-      state.currentTime = action.payload;
     },
     setDuration: (state, action: PayloadAction<number>) => {
       state.duration = action.payload;
