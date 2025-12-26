@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { FaCirclePlay } from "react-icons/fa6";
+import DisplayDuration from "@/app/player/[id]/components/Duration";
 
 async function fetchBook(){
         const res =  await fetch('https://us-central1-summaristt.cloudfunctions.net/getBooks?status=selected')
@@ -38,7 +39,7 @@ export default async function selected () {
                                 <FaCirclePlay className="w-10 h-10 flex justify-center bg-[#fff] stroke-[#000]
                                 items-center rounded-[50px]"/>
                             </div>
-                            <div className="selected__book--duration text-sm font-medium text-[#032b41]">ADD TIME LATER</div>
+                            <div className="selected__book--duration text-sm font-medium text-[#032b41]"><DisplayDuration /></div>
                         </div>
                     </div>
                     </div>

@@ -1,3 +1,4 @@
+import DisplayDuration from "@/app/player/[id]/components/Duration";
 import Link from "next/link";
 import { CiClock2 } from "react-icons/ci";
 import { CiStar } from "react-icons/ci";
@@ -57,7 +58,7 @@ export default async function Suggested() {
                 <div className="suggested__book--details-icon flex">
                   <CiClock2 className="w-4 h-4" />
                 </div>
-                <div className="suggested__book--details-text ">Time</div>
+                <div className="suggested__book--details-text "><DisplayDuration /></div>
               </div>
               <div
                 className="suggested__book--details flex items-center
