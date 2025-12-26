@@ -4,8 +4,12 @@ import { IoMicOutline } from "react-icons/io5";
 import { HiOutlineLightBulb } from "react-icons/hi";
 import { CiBookmark } from "react-icons/ci";
 import BookButtons from "./BookButtons";
+import DisplayDuration from "@/app/player/[id]/components/Duration";
 
 export default  function BookInfo( {bookInfo}: {bookInfo: any} ) {
+
+   
+
     return (
     <div className="book__wrapper flex max-[1000px]:gap-4 gap-8 max-[1000px]:flex-col flex-row">
         <div className="book w-full max-[1000px]:order-1">
@@ -22,7 +26,7 @@ export default  function BookInfo( {bookInfo}: {bookInfo: any} ) {
                     <div className="inner__detail flex items-center w-1/2 text-[#032b41] font-medium
                     text-sm">
                         <div className="inner__icon flex mr-1"><GoClock className="w-6 h-6"/></div>
-                        <div className="inner__duration">TIME</div>
+                        <div className="inner__duration"><DisplayDuration /></div>
                     </div>
                     <div className="inner__detail flex items-center w-1/2 text-[#032b41] font-medium
                     text-sm">
