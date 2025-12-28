@@ -58,7 +58,7 @@ export default async function Suggested() {
                 <div className="suggested__book--details-icon flex">
                   <CiClock2 className="w-4 h-4" />
                 </div>
-                <div className="suggested__book--details-text "><DisplayDuration /></div>
+                <div className="suggested__book--details-text "><DisplayDuration playerInfo={bookInfo}/></div>
               </div>
               <div
                 className="suggested__book--details flex items-center
