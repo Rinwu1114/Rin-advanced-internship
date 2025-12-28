@@ -5,7 +5,7 @@ import { RootState } from "@/app/redux/store";
 import { formatTime } from "./FormatTime";
 import DisplayDuration from './Duration'
 
-export default function ProgressBar(){
+export default function ProgressBar({ playerInfo }: { playerInfo: any }){
 
   const { currentTime } = useSelector((state: RootState) => state.AudioBookPlayer)
  
@@ -15,7 +15,7 @@ export default function ProgressBar(){
         <div className="audio__time text-[#fff] text-sm">{formatTime(currentTime)}</div>
         <input type="range" className="audio__progress--bar rounded-lg max-w-[300px]
         w-full cursor-pointer outline-none h-1" />
-        <div className="audio__time text-[#fff] text-sm"><DisplayDuration /></div>
+        <div className="audio__time text-[#fff] text-sm"><DisplayDuration playerInfo={playerInfo}/></div>
       </div>
  )
 }

@@ -34,7 +34,7 @@ export default async function Recommended () {
                                 <div className="recommended__book--details flex items-center
                                 gap-1 text-sm font-light text-[#6b757b]">
                                     <div className="recommended__book--details-icon flex"><CiClock2 className="w-4 h-4" /></div>
-                                    <div className="recommended__book--details-text "><DisplayDuration /></div>
+                                    <div className="recommended__book--details-text "><DisplayDuration playerInfo={bookInfo}/></div>
                                 </div>
                                 <div className="recommended__book--details flex items-center
                                 gap-1 text-sm font-light text-[#6b757b]">

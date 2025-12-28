@@ -1,12 +1,9 @@
 'use client'
 
-
-import { RootState } from "@/app/redux/store"
 import { formatTime } from "./FormatTime"
-import { useSelector } from "react-redux"
+import useAudioDuration from "@/app/hooks/useAudioDuration"
 
-export default function DisplayDuration() {
-    const { duration } = useSelector((state: RootState) => state.AudioBookPlayer)
-
+export default function DisplayDuration({ playerInfo }: { playerInfo: any }) {
+    const duration = useAudioDuration(playerInfo.audioLink);
     return <span>{formatTime(duration)}</span>
 }
