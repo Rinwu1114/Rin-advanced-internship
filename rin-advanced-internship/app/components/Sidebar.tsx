@@ -36,7 +36,7 @@ export default function Sidebar() {
         </div>
         <div
           className={`sidebar__wrapper flex flex-col justify-between
-            ${isPlayerPage ? "h-[calc(100vh-120px)]" : "h-[calc(100vh-60px)]"} pb-5 overflow-y-auto`}
+            ${isPlayerPage ? "h-[calc(100vh-140px)]" : "h-[calc(100vh-60px)]"} pb-5 overflow-y-auto`}
         >
           <div className="sidebar__top mt-10">
             <Link
