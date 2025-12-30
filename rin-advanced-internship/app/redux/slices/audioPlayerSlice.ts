@@ -18,7 +18,7 @@ export const AudioSlice = createSlice({
     togglePlayPause: (state) => {
       state.isPlaying = !state.isPlaying;
     },
-    seekTo: (state, action: PayloadAction<number>) => {
+    userSeekTo: (state, action: PayloadAction<number>) => {
       state.currentTime = action.payload;
     },
     updateProgress: (state, action: PayloadAction<number>) => {
@@ -34,8 +34,6 @@ export const AudioSlice = createSlice({
         newTime = Math.min(newTime, state.duration)
       }
       state.currentTime = Math.max(0, newTime);
-       state.currentTime = newTime;
-
     },
     Rewind: (state, action: PayloadAction<number>) => {
       const sec = action.payload ?? 10; 
@@ -50,7 +48,7 @@ export const AudioSlice = createSlice({
 
 export const {
   togglePlayPause,
-  seekTo,
+  userSeekTo,
   skipForward,
   Rewind,
   updateProgress,
