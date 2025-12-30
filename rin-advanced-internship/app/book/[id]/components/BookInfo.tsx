@@ -26,7 +26,7 @@ export default  function BookInfo( {bookInfo}: {bookInfo: any} ) {
                     <div className="inner__detail flex items-center w-1/2 text-[#032b41] font-medium
                     text-sm">
                         <div className="inner__icon flex mr-1"><GoClock className="w-6 h-6"/></div>
-                        <div className="inner__duration"><DisplayDuration /></div>
+                        <div className="inner__duration"><DisplayDuration playerInfo={bookInfo}/></div>
                     </div>
                     <div className="inner__detail flex items-center w-1/2 text-[#032b41] font-medium
                     text-sm">

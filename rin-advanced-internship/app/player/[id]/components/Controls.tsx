@@ -13,6 +13,7 @@ export default function AudioControls() {
 
   const { isPlaying } = useSelector((state: RootState) => state.AudioBookPlayer)
   
+  
   const handlePlayPause = () => {
     dispatch(togglePlayPause())
   }

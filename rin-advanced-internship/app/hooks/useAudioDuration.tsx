@@ -17,17 +17,12 @@ export default function useAudioDuration(audioUrl: string): number{
             setTotalDuration(audio.duration)
         }
 
-        const handleError = () => {
-            console.error('Failed to load audio', audioUrl)
-        }
-
         audio.addEventListener('loadedmetadata', handleLoadedMetaData)
-        audio.addEventListener('error', handleError)
-
+   
         return () => {
             if (audioRef.current) {
                 audioRef.current.removeEventListener('loadedmetadata', handleLoadedMetaData)
-                audioRef.current.removeEventListener('error', handleError)
+                
                 audioRef.current.src = ''
             }
         }
