@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import logo from "../../public/assets/logo.png";
 import Image from "next/image";
 import Link from "next/link";
@@ -12,14 +12,13 @@ import { FiLogOut } from "react-icons/fi";
 import { useSelector, useDispatch } from "react-redux";
 import { setActiveTab } from "@/app/redux/slices/activeSlice";
 import { makeStore } from "@/app/redux/store";
-
+import TextSize from "../player/[id]/components/TextSize";
 
 export default function Sidebar() {
+  const dispatch = useDispatch();
 
-    const dispatch = useDispatch();
-
-    type StoreState = ReturnType<ReturnType<typeof makeStore>['getState']>;
-    const active = useSelector((state: StoreState) => state.ActiveTab.activeTab);
+  type StoreState = ReturnType<ReturnType<typeof makeStore>["getState"]>;
+  const active = useSelector((state: StoreState) => state.ActiveTab.activeTab);
 
   return (
     <div className="sidebar__overlay">
@@ -36,15 +35,21 @@ export default function Sidebar() {
         <div
           className="sidebar__wrapper flex flex-col justify-between
             h-[calc(100vh-60px)] pb-5 overflow-y-auto"
-            >
+        >
           <div className="sidebar__top mt-10">
             <Link
               href={"/for-you"}
               className="link__wrapper flex items-center h-14
                     mb-2 hover:bg-gray-100 transition-colors duration-150 ease"
-               onClick={() => dispatch(setActiveTab('for-you'))} >
-              <div className={active === 'for-you' ? "link__line h-full w-[5px] mr-4 bg-[#2bd97c]"
-                 : "h-full w-[5px] mr-4" }></div>
+              onClick={() => dispatch(setActiveTab("for-you"))}
+            >
+              <div
+                className={
+                  active === "for-you"
+                    ? "link__line h-full w-[5px] mr-4 bg-[#2bd97c]"
+                    : "h-full w-[5px] mr-4"
+                }
+              ></div>
               <div
                 className="sidebar__icon--wrapper flex items-center justify-center
                     mr-2 "
@@ -57,9 +62,15 @@ export default function Sidebar() {
               href={"/my-library"}
               className="link__wrapper flex items-center h-14
                     mb-2 hover:bg-gray-100 transition-colors duration-150 ease"
-             onClick={() => dispatch(setActiveTab('library'))}>
-              <div className={active === 'library' ? "link__line h-full w-[5px] mr-4 bg-[#2bd97c]"
-                 : "h-full w-[5px] mr-4" }></div>
+              onClick={() => dispatch(setActiveTab("library"))}
+            >
+              <div
+                className={
+                  active === "library"
+                    ? "link__line h-full w-[5px] mr-4 bg-[#2bd97c]"
+                    : "h-full w-[5px] mr-4"
+                }
+              ></div>
               <div
                 className="sidebar__icon--wrapper flex items-center justify-center
                     mr-2"
@@ -98,15 +109,31 @@ export default function Sidebar() {
               </div>
               <div className="sidebar__link--text text-[#032b41]">Search</div>
             </div>
+          <div
+            className="link__wrapper flex items-center h-14
+            mb-2 cursor-pointer"
+            >
+            <div
+              className="sidebar__font--wrapper flex ml-6 gap-2"
+              >
+              <TextSize />
+            </div>
           </div>
+              </div>
           <div className="sidebar__bottom">
             <Link
               href={"/settings"}
               className="link__wrapper flex items-center h-14
                     mb-2 hover:bg-gray-100 transition-colors duration-150 ease"
-            onClick={() => dispatch(setActiveTab('settings'))}>
-              <div className={active === 'settings' ? "link__line h-full w-[5px] mr-4 bg-[#2bd97c]"
-                 : "h-full w-[5px] mr-4" }></div>
+              onClick={() => dispatch(setActiveTab("settings"))}
+            >
+              <div
+                className={
+                  active === "settings"
+                    ? "link__line h-full w-[5px] mr-4 bg-[#2bd97c]"
+                    : "h-full w-[5px] mr-4"
+                }
+              ></div>
               <div
                 className="sidebar__icon--wrapper flex items-center justify-center
                     mr-2"
