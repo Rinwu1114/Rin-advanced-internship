@@ -13,6 +13,7 @@ import TrackInfo from "./TrackInfo";
 import AudioControls from "./Controls";
 import ProgressBar from "./ProgressBar";
 
+
 export default function AudioPlayer({ playerInfo }: { playerInfo: any }) {
   const audioRef = useRef<HTMLAudioElement>(null);
   const dispatch = useDispatch();
