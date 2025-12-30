@@ -13,13 +13,15 @@ import { useSelector, useDispatch } from "react-redux";
 import { setActiveTab } from "@/app/redux/slices/activeSlice";
 import { makeStore } from "@/app/redux/store";
 import TextSize from "../player/[id]/components/TextSize";
+import { usePathname } from "next/navigation";
 
 export default function Sidebar() {
   const dispatch = useDispatch();
 
   type StoreState = ReturnType<ReturnType<typeof makeStore>["getState"]>;
   const active = useSelector((state: StoreState) => state.ActiveTab.activeTab);
-
+  const isPlayerPage = usePathname().startsWith('/player/')
+  
   return (
     <div className="sidebar__overlay">
       <nav
@@ -33,8 +35,8 @@ export default function Sidebar() {
           <Image src={logo} alt="Summarist Logo" className="w-full h-10" />
         </div>
         <div
-          className="sidebar__wrapper flex flex-col justify-between
-            h-[calc(100vh-60px)] pb-5 overflow-y-auto"
+          className={`sidebar__wrapper flex flex-col justify-between
+            ${isPlayerPage ? "h-[calc(100vh-120px)]" : "h-[calc(100vh-60px)]"} pb-5 overflow-y-auto`}
         >
           <div className="sidebar__top mt-10">
             <Link
