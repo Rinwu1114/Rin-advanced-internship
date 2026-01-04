@@ -8,7 +8,7 @@ export default function ReduxProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const storeRef = useRef<any>(undefined); // Use 'any' temporarily to bypass the type issue
+  const storeRef = useRef<AppStore | undefined>(undefined); // Use 'any' temporarily to bypass the type issue
   if (!storeRef.current) {
     storeRef.current = makeStore();
   }

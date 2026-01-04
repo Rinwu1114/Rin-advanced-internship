@@ -3,6 +3,7 @@ import loginPopUpReducer from './slices/loginSlice';
 import activeReducer from './slices/activeSlice';
 import audio from './slices/audioPlayerSlice'
 import SizeSlice from './slices/activeSize';
+import PlanSlice from './slices/activePlan';
 
 export const makeStore = () => {
     return configureStore({
@@ -10,6 +11,7 @@ export const makeStore = () => {
             loginPopUp: loginPopUpReducer,
             ActiveTab: activeReducer,
             ActiveSize: SizeSlice,
+            ActivePlan: PlanSlice,
             AudioBookPlayer: audio 
         },
     });
