@@ -1,15 +1,33 @@
 "use client";
 
 import { useDispatch } from "react-redux";
+import type { AppDispatch } from '@/app/redux/store';
 import { switchMode, closePopUp } from "@/app/redux/slices/loginSlice";
 import { FcGoogle } from "react-icons/fc";
 import { MdPerson } from "react-icons/md";
+import { useState } from "react";
+import { loginUser, loginGuest, loginGoogle, logout } from "@/app/redux/thunks/authThunk";
 
 export default function Login() {
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
 
         const switchToSignUp = () => {
     dispatch(switchMode('signup'));
+  }
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleEmailLogin = () => {
+    dispatch(loginUser({email, password}));
+  }
+  const handleGoogleLogin = () => {
+    dispatch(loginGoogle());
+  }
+  const handleGuestLogin = () => {
+    dispatch(loginGuest());
+  }
+  const handleLogout = () => {
+    dispatch(logout());
   }
 
     return(
@@ -26,7 +44,7 @@ export default function Login() {
                     w-9 h-9 rounded-sm absolute left-0.5">
                       <MdPerson className="w-8 h-8"/>
                     </figure>
-                    <div>Login as a Guest</div>
+                    <div onClick={handleGuestLogin}>Login as a Guest</div>
                   </button>
                   <div className="auth__seperator flex items-center my-4
                   before:h-[1px] before:bg-[#bac8ce] before:grow before:content-[''] before:block 
@@ -51,12 +69,16 @@ export default function Login() {
                       text-[#394547] focus:outline-none focus:border-[#2bd97c] text-sm"
                       type="email"
                       placeholder="Email Address"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
                     />
                     <input
                       className="auth__main--input h-10 px-3 rounded-sm border-[2px] border-[#bac8ce]
                       text-[#394547] focus:outline-none focus:border-[#2bd97c] text-sm"
                       type="password"
                       placeholder="Password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
                     />
                     <button className="btn flex justify-center">
                       <span >Login</span>
