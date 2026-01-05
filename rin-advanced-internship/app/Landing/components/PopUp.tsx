@@ -1,6 +1,7 @@
-"use client";
-
+'use client';
 import { useSelector, useDispatch } from "react-redux";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import { closePopUp } from "@/app/redux/slices/loginSlice";
 import { RootState } from "../../redux/store";
 import { HiOutlineXMark } from "react-icons/hi2";
@@ -8,11 +9,18 @@ import Signup from "./Signup";
 import Login from "./Login";
 
 export default function PopUp() {
+  const router = useRouter();
   const isOpen = useSelector((state: RootState) => state.loginPopUp.isOpen);
+  const user = useSelector((state: RootState) => state.AuthState.user);
   const modeSwitch = useSelector((state: RootState) => state.loginPopUp.mode);
-    const mode = modeSwitch;
+  const mode = modeSwitch;
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    if (user) {
+      router.push('/for-you');
+    } }, [user, router]);
+  
   const handleOverlayClick = () => {
     dispatch(closePopUp());
   };
@@ -31,7 +39,7 @@ export default function PopUp() {
   else
     return (
       <section id="login">
-        <div className="wrapper flex relative flex-col w-full">
+        <div className="wrapper flex relative flex-col w-full z-30">
           <div
             className="sidebar__overlay fixed top-0 left-0 w-full h-full z-10
           "

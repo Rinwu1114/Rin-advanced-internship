@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { register } from "module";
-import { loginUser, registerUser } from "../thunks/authThunk";
+import { loginUser, registerUser, loginGuest, loginGoogle } from "../thunks/authThunk";
 
 export type PlanType = 'free' | 'premium';
 
@@ -67,6 +67,20 @@ const authSlice = createSlice ({
         .addCase(registerUser.rejected, (state, action) => {
             state.error = action.error.message;
         })
+        .addCase(loginGuest.fulfilled, (state, action) => {
+            state.user = action.payload;
+            state.error = undefined;
+        })
+        .addCase(loginGuest.rejected, (state, action) => {
+            state.error = action.error.message;
+        })
+        .addCase(loginGoogle.fulfilled, (state, action) => {
+            state.user = action.payload;
+            state.error = undefined;
+        })
+        .addCase(loginGoogle.rejected, (state, action) => {
+            state.error = action.error.message;
+        });
     }
 })
 

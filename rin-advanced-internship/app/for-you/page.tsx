@@ -3,10 +3,12 @@ import Search from "../components/Search";
 import Selected from "./components/Selected";
 import Recommended from "./components/Recommended";
 import Suggested from "./components/Suggested";
+import PopUp from "../Landing/components/PopUp";
 
 export default function forYou() {
   return (
     <div className="grid grid-cols-[200px_minmax(0,1fr)]">
+      <PopUp />
       <Sidebar />
       <div>
         <Search />

@@ -16,9 +16,6 @@ export default function textSize() {
   const currentPath = usePathname();
   const specificLink = "/player/";
   const isActive = currentPath.startsWith(specificLink);
-  console.log(currentPath, "current path");
-  console.log(isActive);
-  console.log(specificLink);
   return (
     <>
       {isActive && (
