@@ -1,15 +1,25 @@
 "use client";
 
 import { useDispatch } from "react-redux";
+import type { AppDispatch } from '@/app/redux/store';
 import { switchMode } from "@/app/redux/slices/loginSlice";
 import { FcGoogle } from "react-icons/fc";
+import { useState } from "react";
+import { registerUser } from "@/app/redux/thunks/authThunk";
 
 export default function Signup() {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const switchToLogin = () => {
     dispatch(switchMode("login"));
   };
+   const handleRegister = () => {
+    if (email && password) {
+      dispatch(registerUser({ email, password }));
+    }
+  }
 
   return (
     <>
@@ -44,14 +54,19 @@ export default function Signup() {
                           text-[#394547] focus:outline-none focus:border-[#2bd97c] text-sm"
           type="email"
           placeholder="Email Address"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
         <input
           className="auth__main--input h-10 px-3 rounded-sm border-[2px] border-[#bac8ce]
                           text-[#394547] focus:outline-none focus:border-[#2bd97c] text-sm"
           type="password"
           placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
         />
-        <button className="btn flex justify-center">
+        <button className="btn flex justify-center"
+        onClick={handleRegister}>
           <span>Sign up</span>
         </button>
       </form>

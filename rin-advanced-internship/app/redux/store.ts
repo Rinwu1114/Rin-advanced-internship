@@ -4,6 +4,7 @@ import activeReducer from './slices/activeSlice';
 import audio from './slices/audioPlayerSlice'
 import SizeSlice from './slices/activeSize';
 import PlanSlice from './slices/activePlan';
+import Auth from './slices/authState';
 
 export const makeStore = () => {
     return configureStore({
@@ -12,7 +13,8 @@ export const makeStore = () => {
             ActiveTab: activeReducer,
             ActiveSize: SizeSlice,
             ActivePlan: PlanSlice,
-            AudioBookPlayer: audio 
+            AudioBookPlayer: audio,
+            AuthState: Auth,
         },
     });
 }
