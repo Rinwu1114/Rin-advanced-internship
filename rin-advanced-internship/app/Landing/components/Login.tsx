@@ -12,6 +12,7 @@ import {
   loginGuest,
   loginGoogle,
 } from "@/app/redux/thunks/authThunk";
+import { RootState } from "@/app/redux/store";
 
 export default function Login() {
   const dispatch = useDispatch<AppDispatch>();
@@ -19,6 +20,8 @@ export default function Login() {
   const switchToSignUp = () => {
     dispatch(switchMode("signup"));
   };
+  const user = useSelector((state: RootState) => state.AuthState.user);
+  
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -29,15 +32,19 @@ export default function Login() {
   //   dispatch(loginGoogle());
   // };
 
-  const { user } = useSelector((state: any) => state.AuthState);
-
-  const handleGuestLogin = () => {
-    dispatch(loginGuest());
-    if (user) {
-      router.push('/for-you');
+  const handleGuestLogin = async () => {
+    try{
+      const result = await dispatch(loginGuest());
+if (loginGuest.fulfilled.match(result)) {
+dispatch(closePopUp());
+      router.push("/for-you");
+     console.log('unwrap result:', result);
+        console.log('Auth user state:', user);
+      }
+    } catch (error) {
+      console.log("guest login failed:", error)
     }
-    console.log("Guest login dispatched");
-    console.log('Auth user state:', user);
+    
   };
 
   return (

@@ -7,7 +7,7 @@ import {
   sendPasswordReset,
   loginAsGuest,
 } from "../../firebase/auth";
-import { PlanType } from "../slices/authState";
+import { loginSuccess, PlanType } from "../slices/authState";
 import { auth } from "../../firebase/init";
 import { signInAnonymously } from "firebase/auth";
 
@@ -39,14 +39,31 @@ export const loginGoogle = createAsyncThunk(
   }
 );
 
-export const loginGuest = createAsyncThunk("auth/loginAsGuest", async () => {
-  const firebaseUser = await loginAsGuest(); // Service function
-  return {
-    uid: firebaseUser.uid,
-    email: firebaseUser.email || "guest@guest.com",
-    isGuest: true, 
-    plan: "premium" as PlanType,
-  };
+export const loginGuest = createAsyncThunk("auth/loginAsGuest",
+   async (_, { dispatch }) => {
+    try {
+      const result = await signInAnonymously(auth);
+      const user = result.user;
+      const userData = {
+        uid: user.uid,
+        email: user.email || 'guest@guest.com',
+        isGuest: true,
+        plan: 'premium' as PlanType,
+      };
+
+    dispatch(loginSuccess(userData));
+    return userData;
+  } catch (error) {
+    console.error("Error during anonymous sign-in:", error);
+    throw error;
+  }
+  // const firebaseUser = await loginAsGuest(); // Service function
+  // return {
+  //   uid: firebaseUser.uid,
+  //   email: firebaseUser.email || "guest@guest.com",
+  //   isGuest: true,
+  //   plan: "premium" as PlanType,
+  // };
 });
 
 //register thunk

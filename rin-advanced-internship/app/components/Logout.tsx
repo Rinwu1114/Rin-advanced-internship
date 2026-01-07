@@ -16,7 +16,9 @@ export default function LogoutButton() {
 
   const handleLogout = async () => {
     await signOut(auth);
+    
     dispatch(logout());
+console.log("User logged out")
   };
 
   const handleLoginPopup = () => {
