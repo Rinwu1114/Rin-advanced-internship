@@ -15,11 +15,6 @@ export default function PopUp() {
   const modeSwitch = useSelector((state: RootState) => state.loginPopUp.mode);
   const mode = modeSwitch;
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (user) {
-      router.push('/for-you');
-    } }, [user, router]);
   
   const handleOverlayClick = () => {
     dispatch(closePopUp());
