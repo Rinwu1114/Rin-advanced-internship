@@ -2,6 +2,7 @@ import DisplayDuration from "@/app/player/[id]/components/Duration";
 import Link from "next/link";
 import { CiClock2 } from "react-icons/ci";
 import { CiStar } from "react-icons/ci";
+import BookPill from "./BookPill";
 
 async function fetchRecommended(){
     const res = await fetch('https://us-central1-summaristt.cloudfunctions.net/getBooks?status=recommended')
@@ -18,8 +19,7 @@ export default async function Recommended () {
                     {books.map((bookInfo: any) => (
                         <Link href={`/book/${bookInfo.id}`} className="for-you__recommended--books-link 
                         relative rounded-sm max-w-[200px] w-full px-3 pt-8 pb-3 snap-start " key={bookInfo.id}>
-                            {bookInfo.subscriptionRequired === true ? <div className="book__pill bg-[#032b41] h-[18px] px-2 absolute
-            top-0 right-0 text-[#fff] text-[10px] flex items-center rounded-3xl">Premium</div>
+                            {bookInfo.subscriptionRequired === true ? <BookPill />
             : null}
                             <audio src={bookInfo.audioLink}></audio>
                             <figure className="book__img--wrapper mb-2 w-[172px] h-[172px]">
