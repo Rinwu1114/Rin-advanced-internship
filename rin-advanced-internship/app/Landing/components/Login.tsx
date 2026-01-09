@@ -3,9 +3,10 @@
 import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch } from "@/app/redux/store";
 import { switchMode, closePopUp } from "@/app/redux/slices/loginSlice";
+import { formValidation } from "@/app/hooks/FormValidation";
 import { FcGoogle } from "react-icons/fc";
 import { MdPerson } from "react-icons/md";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import {
   loginUser,
@@ -13,6 +14,8 @@ import {
   loginGoogle,
 } from "@/app/redux/thunks/authThunk";
 import { RootState } from "@/app/redux/store";
+import FormError from "./FormError";
+import FormSuccess from "./FormSuccess";
 
 export default function Login() {
   const dispatch = useDispatch<AppDispatch>();
@@ -21,42 +24,73 @@ export default function Login() {
     dispatch(switchMode("signup"));
   };
   const user = useSelector((state: RootState) => state.AuthState.user);
-  
+
+  const { formErrorCode, setFormErrorCode, validateBoth, formSuccessCode } =
+    formValidation();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  // const handleEmailLogin = () => {
-  //   dispatch(loginUser({ email, password }));
-  // };
-  // const handleGoogleLogin = () => {
-  //   dispatch(loginGoogle());
-  // };
-
-  const handleGuestLogin = async () => {
-    try{
-      const result = await dispatch(loginGuest());
-if (loginGuest.fulfilled.match(result)) {
-dispatch(closePopUp());
-      router.push("/for-you");
-     console.log('unwrap result:', result);
-        console.log('Auth user state:', user);
+  const handleEmailLogin = async (e: any) => {
+    e.preventDefault();
+    const errorCode = validateBoth(email, password);
+    setFormErrorCode(0);
+    if (errorCode > 0) {
+      setFormErrorCode(errorCode);
+      return;
+    }
+    try {
+      const result = await dispatch(loginUser({ email, password }));
+      if (loginUser.fulfilled.match(result)) {
+        dispatch(closePopUp());
+        router.push("/for-you");
+      }
+      if (!loginUser.fulfilled.match(result)) {
+        setFormErrorCode(4);
       }
     } catch (error) {
-      console.log("guest login failed:", error)
+      setFormErrorCode(5);
     }
-    
   };
 
+  const handleGoogleLogin = async () => {
+    try {
+      const result = await dispatch(loginGoogle());
+      if (loginGoogle.fulfilled.match(result)) {
+        dispatch(closePopUp());
+        router.push("/for-you");
+      }
+    } catch (error) {
+      console.error("Problem logging in with Google:", error);
+    }
+  };
+
+  const handleGuestLogin = async () => {
+    try {
+      const result = await dispatch(loginGuest());
+      if (loginGuest.fulfilled.match(result)) {
+        dispatch(closePopUp());
+        router.push("/for-you");
+        console.log("unwrap result:", result);
+        console.log("Auth user state:", user);
+      }
+    } catch (error) {
+      console.log("guest login failed:", error);
+    }
+  };
+  //sepperated error from file, now error is not showing. bug
   return (
     <>
       <div className="auth__title text-center mb-6 font-bold text-xl text-[#032b41]">
         Login to Summarist
       </div>
+      <FormError errorCode={formErrorCode} />
+      <FormSuccess successCode={formSuccessCode} />
       <button
         className="guest__btn--wrapper relative flex bg-[#3a579d] hover:bg-[#25396b]
                     transition-colors duration-150  text-white items-center justify-center w-full h-10
                     min-w-[180px] rounded-md"
-        onClick={() => dispatch(closePopUp())}
+        onClick={handleGuestLogin}
       >
         <figure
           className="guest__icon flex items-center justify-center
@@ -64,7 +98,7 @@ dispatch(closePopUp());
         >
           <MdPerson className="w-8 h-8" />
         </figure>
-        <div onClick={handleGuestLogin}>Login as a Guest</div>
+        <div>Login as a Guest</div>
       </button>
       <div
         className="auth__seperator flex items-center my-4
@@ -79,6 +113,7 @@ dispatch(closePopUp());
         className="google__btn--wrapper relative flex bg-[#4285f4] hover:bg-[#3367d6]
                     transition-colors duration-150  text-white items-center justify-center w-full h-10
                     min-w-[180px] rounded-md"
+        onClick={handleGoogleLogin}
       >
         <figure
           className="google__icon flex items-center justify-center
@@ -114,7 +149,7 @@ dispatch(closePopUp());
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button className="btn flex justify-center">
+        <button className="btn flex justify-center" onClick={handleEmailLogin}>
           <span>Login</span>
         </button>
       </form>

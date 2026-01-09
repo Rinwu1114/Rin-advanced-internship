@@ -1,31 +1,67 @@
 "use client";
 
 import { useDispatch } from "react-redux";
-import type { AppDispatch } from '@/app/redux/store';
+import type { AppDispatch } from "@/app/redux/store";
 import { switchMode } from "@/app/redux/slices/loginSlice";
 import { FcGoogle } from "react-icons/fc";
 import { useState } from "react";
 import { registerUser } from "@/app/redux/thunks/authThunk";
+import { formValidation } from "@/app/hooks/FormValidation";
+import FormSuccess from "./FormSuccess";
+import FormError from "./FormError";
 
 export default function Signup() {
   const dispatch = useDispatch<AppDispatch>();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const {
+    formErrorCode,
+    setFormErrorCode,
+    validateBoth,
+    formSuccessCode,
+    setFormSuccessCode,
+  } = formValidation();
 
   const switchToLogin = () => {
     dispatch(switchMode("login"));
   };
-   const handleRegister = () => {
-    if (email && password) {
-      dispatch(registerUser({ email, password }));
+
+  const handleRegister = async (e: any) => {
+    e.preventDefault();
+    setFormErrorCode(0);
+    setFormSuccessCode(0);
+    const errorCode = validateBoth(email, password);
+    if (errorCode > 0) {
+      setFormErrorCode(errorCode);
+      return;
     }
-  }
+    try {
+      const result = await dispatch(registerUser({ email, password }));
+      if (registerUser.fulfilled.match(result)) {
+        setFormSuccessCode(1); // reg success code
+        setTimeout(() =>{
+          dispatch(switchMode("login"));
+        }, 2000)
+      } else if (registerUser.rejected.match(result)) {
+        const error = result.error;
+        if (error?.message?.includes("email-already-in-use")) {
+          setFormErrorCode(7);
+        } else {
+          setFormErrorCode(8);
+        }
+      }
+    } catch (error) {
+      setFormErrorCode(8);
+    }
+  };
 
   return (
     <>
       <div className="auth__title text-center mb-6 font-bold text-xl text-[#032b41]">
         Sign up to Summarist
       </div>
+      <FormError errorCode={formErrorCode} />
+      <FormSuccess successCode={formSuccessCode} />
       <button
         className="google__btn--wrapper relative flex bg-[#4285f4] hover:bg-[#3367d6]
                         transition-colors duration-150  text-white items-center justify-center w-full h-10
@@ -65,8 +101,7 @@ export default function Signup() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button className="btn flex justify-center"
-        onClick={handleRegister}>
+        <button className="btn flex justify-center" onClick={handleRegister}>
           <span>Sign up</span>
         </button>
       </form>
