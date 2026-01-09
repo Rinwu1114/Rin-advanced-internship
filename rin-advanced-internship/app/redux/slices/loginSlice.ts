@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 interface OpenState {
     isOpen: boolean
-    mode: 'login' | 'signup'
+    mode: 'login' | 'signup' | 'reset'
 }
 
 const initialState: OpenState = {

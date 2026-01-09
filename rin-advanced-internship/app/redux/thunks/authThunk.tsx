@@ -76,12 +76,10 @@ export const loginGuest = createAsyncThunk("auth/loginAsGuest",
 export const registerUser = createAsyncThunk(
   "auth/registerUser",
   async ({ email, password }: { email: string; password: string }) => {
-    const firebaseUser = await registerWithEmail(email, password);
+   await registerWithEmail(email, password);
     return {
-      uid: firebaseUser.uid,
-      email: firebaseUser.email!,
-      isGuest: false,
-      plan: "free" as PlanType,
+      success: true,
+      email: email
     };
   }
 );

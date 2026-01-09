@@ -8,6 +8,7 @@ export default function FormError({ errorCode }: FormErrorProps) {
 
 if ( errorCode === 0 ) return null
     const defaultMessages = {
+        9: "User email not found",
         1: "Please enter a valid email",
         2: "Please enter your password",
         3: "Please enter your email and password",
@@ -15,7 +16,8 @@ if ( errorCode === 0 ) return null
         5: "Auth Login error",
         6: "Password must contain 6 or more characters",
         7: "Email already registered",
-        8: "Registration failed"
+        8: "Registration failed",
+        10: "Auth error, email not sent"
     }
     const messages = {...defaultMessages}
     return(

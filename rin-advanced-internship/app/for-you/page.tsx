@@ -3,7 +3,7 @@ import Search from "../components/Search";
 import Selected from "./components/Selected";
 import Recommended from "./components/Recommended";
 import Suggested from "./components/Suggested";
-import PopUp from "../Landing/components/PopUp";
+import PopUp from "../Landing/components/PopUp/PopUp";
 
 export default function forYou() {
   return (

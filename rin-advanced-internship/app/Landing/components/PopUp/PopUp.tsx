@@ -1,21 +1,20 @@
-'use client';
+"use client";
 import { useSelector, useDispatch } from "react-redux";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+
 import { closePopUp } from "@/app/redux/slices/loginSlice";
-import { RootState } from "../../redux/store";
+import { RootState } from "../../../redux/store";
 import { HiOutlineXMark } from "react-icons/hi2";
 import Signup from "./Signup";
 import Login from "./Login";
+import ResetPassword from "./ResetPassword";
 
 export default function PopUp() {
-  const router = useRouter();
+  
   const isOpen = useSelector((state: RootState) => state.loginPopUp.isOpen);
-  const user = useSelector((state: RootState) => state.AuthState.user);
   const modeSwitch = useSelector((state: RootState) => state.loginPopUp.mode);
   const mode = modeSwitch;
   const dispatch = useDispatch();
-  
+
   const handleOverlayClick = () => {
     dispatch(closePopUp());
   };
@@ -51,7 +50,13 @@ export default function PopUp() {
                   className="pt-12 px-8 pb-2 auth__content"
                   onClick={handlePopUpClick}
                 >
-{ mode === 'login' ? (<Login /> ) : (<Signup />)}
+                  {mode === "login" ? (
+                    <Login />
+                  ) : mode === "signup" ? (
+                    <Signup />
+                  ) : (
+                    <ResetPassword />
+                  )}
                   <HiOutlineXMark
                     onClick={() => dispatch(closePopUp())}
                     className="cursor-pointer
