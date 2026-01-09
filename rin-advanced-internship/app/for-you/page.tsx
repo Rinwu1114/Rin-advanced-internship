@@ -7,21 +7,23 @@ import PopUp from "../Landing/components/PopUp/PopUp";
 
 export default function forYou() {
   return (
-    <div className="grid grid-cols-[200px_minmax(0,1fr)]">
+    <>
       <PopUp />
-      <Sidebar />
-      <div>
-        <Search />
-        <div className="row">
-          <div className="container">
-            <div className="for-you__wrapper">
-              <Selected />
-              <Recommended />
-              <Suggested />
+      <div className="grid grid-cols-[200px_minmax(0,1fr)]">
+        <Sidebar />
+        <div>
+          <Search />
+          <div className="row">
+            <div className="container">
+              <div className="for-you__wrapper">
+                <Selected />
+                <Recommended />
+                <Suggested />
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
