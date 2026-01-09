@@ -21,7 +21,7 @@ export const loginUser = createAsyncThunk(
       uid: firebaseUser.uid,
       email: firebaseUser.email!,
       isGuest: false,
-      plan: "free" as PlanType,
+      plan: "Basic" as PlanType,
     };
   }
 );
@@ -38,7 +38,7 @@ export const loginGoogle = createAsyncThunk(
       uid: user.uid, 
       email: user.email!,
       isGuest: false, 
-      plan: 'free' as PlanType    
+      plan: 'Basic' as PlanType    
     }
 
     dispatch(loginSuccess(userData))

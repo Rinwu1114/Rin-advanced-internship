@@ -3,8 +3,10 @@
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "@/app/redux/store";
+import { useRouter } from "next/navigation";
 
 export default function LoggedInSettings() {
+    const router = useRouter();
     const user = useSelector((state: RootState) => state.AuthState.user);
     useEffect(() => {
         console.log("User in LoggedInSettings:", user);
@@ -18,7 +20,13 @@ export default function LoggedInSettings() {
         items-start gap-2 mb-8 border-b border-[#e1e7ea] pb-6">
             <div className="setting__subtitle text-lg font-bold text-[#032b41]">Your Subscription plan</div>
             <div className="setting__text text-[#032b41]">
-                { user ? user.plan : null}</div>
+                { user ? user.plan : null}
+                
+                </div>
+                { user?.plan === "Basic" ? <button className="btn justify-center max-w-[150px]"
+                        onClick={() => router.push(`/choose-plan`)}>
+                            Upgrade to Premium
+                        </button> : null}
         </div>
         <div className="setting__content flex flex-col
         items-start gap-2 pb-6">

@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { register } from "module";
 import { loginUser, registerUser, loginGuest, loginGoogle } from "../thunks/authThunk";
 
-export type PlanType = 'free' | 'premium';
+export type PlanType = 'Basic' | 'premium';
 
 interface AuthState {
     user: null | {
