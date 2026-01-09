@@ -17,7 +17,7 @@ export default function AuthListener() {
                     uid: firebaseUser.uid,
                     email: firebaseUser.email!,
                     isGuest: firebaseUser.isAnonymous,
-                    plan: 'free' as PlanType
+                    plan: 'Basic' as PlanType
                 }));
             } else {
                 dispatch(logout());
