@@ -67,10 +67,6 @@ const authSlice = createSlice ({
         .addCase(registerUser.rejected, (state, action) => {
             state.error = action.error.message;
         })
-        // .addCase(loginGuest.fulfilled, (state, action) => {
-        //     state.user = action.payload;
-        //     state.error = undefined;
-        // })
         .addCase(loginGuest.rejected, (state, action) => {
             state.error = action.error.message;
         })
