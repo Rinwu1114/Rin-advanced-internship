@@ -25,6 +25,10 @@ export default function Login() {
   };
   const user = useSelector((state: RootState) => state.AuthState.user);
 
+  const switchToReset = () => {
+    dispatch(switchMode('reset'))
+  }
+
   const { formErrorCode, setFormErrorCode, validateBoth, formSuccessCode } =
     formValidation();
 
@@ -156,6 +160,7 @@ export default function Login() {
       <div
         className="auth__forgot--password text-center text-[#116be9] font-light text-sm
                 cursor-pointer mx-auto mt-4 "
+      onClick={switchToReset}
       >
         Forgot your password?
       </div>

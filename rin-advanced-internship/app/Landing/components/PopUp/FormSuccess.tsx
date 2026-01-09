@@ -8,7 +8,7 @@ export default function FormSuccess({ successCode }: FormSuccessProps) {
     if ( successCode === 0 ) return null
     const defaultMessages = {
         1: "User registration sucess, Please log in",
-        2: "Password reset email sent to provided email if registered",
+        2: "Password reset email sent to provided email",
     }
     const messages = {...defaultMessages}
     return(

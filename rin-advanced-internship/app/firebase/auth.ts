@@ -11,7 +11,8 @@ import { auth } from "../firebase/init";
 
 export const registerWithEmail = async (email: string, password: string) => {
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-    return userCredential.user;
+    await signOut(auth)
+    return null
 }
 
 export const loginWithEmail = async (email: string, password: string) => {

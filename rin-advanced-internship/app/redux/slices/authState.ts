@@ -25,28 +25,16 @@ const authSlice = createSlice ({
         loginSuccess: (state, action: PayloadAction<AuthState["user"]>) => {
             state.user = action.payload;
         },
-        loginFailure: (state, action: PayloadAction<string>) => {
-            state.error = action.payload;
-        },
         logout: (state) => {
             state.user = null;
-            state.error = undefined;
-        },
-        clearError: (state) => {
             state.error = undefined;
         },
         registerSuccess: (state) => {
             state.error = undefined;
             state.successMessage = "Registration successful! Please log in.";
         },
-        registerFailure: (state, action: PayloadAction<string>) => {
-            state.error = action.payload;
-        }, 
         guestLogin: (state, action: PayloadAction<AuthState["user"]>) => {
             state.user = action.payload;
-        },
-        googleLoginFailure: (state, action: PayloadAction<string>) => {
-            state.error = action.payload;
         },
         setUser: (state, action: PayloadAction<AuthState["user"]>) => {
             state.user = action.payload;
@@ -82,13 +70,9 @@ const authSlice = createSlice ({
 
 export const {
     loginSuccess,
-    loginFailure,
     logout,
-    clearError,
     registerSuccess,
-    registerFailure,
     guestLogin,
-    googleLoginFailure,
     setUser
 } = authSlice.actions;
 

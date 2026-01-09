@@ -1,6 +1,6 @@
 import Image from "next/image";
 import landingimg from "../../../public/assets/landing.png"
-import LoginButton from "./LoginButton";
+import LoginButton from "./PopUp/LoginButton";
 
 export default function LandingComponent() {
 

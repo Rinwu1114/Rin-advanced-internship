@@ -3,7 +3,7 @@ import Features from "./components/Features";
 import Stats from "./components/Stats";
 import Reviews from "./components/Reviews";
 import Numbers from "./components/Numbers";
-import PopUp from "./components/PopUp";
+import PopUp from "./components/PopUp/PopUp";
 
 export default function Landing() {
   return (

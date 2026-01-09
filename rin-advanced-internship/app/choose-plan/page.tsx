@@ -2,7 +2,7 @@ import Faq from "./components/Faq"
 import Header from "./components/Header"
 import Plan from "./components/Plan"
 import Footer from "../components/Footer"
-import Popup from '@/app/Landing/components/PopUp'
+import Popup from '@/app/Landing/components/PopUp/PopUp'
 
 export default function choosePlan () {
     return(
