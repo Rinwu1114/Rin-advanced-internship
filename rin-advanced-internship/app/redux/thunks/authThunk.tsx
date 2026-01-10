@@ -64,18 +64,21 @@ export const loginGoogle = createAsyncThunk(
 export const loginGuest = createAsyncThunk(
   "auth/loginAsGuest",
   async (_, { dispatch }) => {
-    const firebaseUser = await loginAsGuest();
-      const userData = {
+    try{
+      const firebaseUser = await loginAsGuest();
+    const userData = {
         uid: firebaseUser.uid,
         email: "guest@guest.com",
         isGuest: true,
         plan: "Premium" as PlanType,
       };
+      await createOrUpdateUserProfile(userData);
 
-      await createOrUpdateUserProfile(userData)
-
-      dispatch(loginSuccess(userData));
-      return userData;
+      dispatch(loginSuccess(userData))
+        return userData;
+      } catch (error) {
+      throw error;
+      }
 
   }
 );
@@ -86,7 +89,7 @@ export const registerUser = createAsyncThunk(
   "auth/registerUser",
   async ({ email, password }: { email: string; password: string }) => {
     const firebaseUser = await registerWithEmail(email, password);
-    if(!firebaseUser || ! !firebaseUser.email){
+    if(!firebaseUser || !firebaseUser.email){
       throw new Error ("user reg failed")
     }
     

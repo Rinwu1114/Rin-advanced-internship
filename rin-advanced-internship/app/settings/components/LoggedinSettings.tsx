@@ -1,6 +1,5 @@
 'use client';
 
-import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "@/app/redux/store";
 import { useRouter } from "next/navigation";
@@ -8,10 +7,7 @@ import { useRouter } from "next/navigation";
 export default function LoggedInSettings() {
     const router = useRouter();
     const user = useSelector((state: RootState) => state.AuthState.user);
-    useEffect(() => {
-        console.log("User in LoggedInSettings:", user);
-        console.log("current Path:", window.location.pathname)
-    }, [user])
+
     return (
         <>
         <div className="settings__title pb-4 text-left border-b border-[#e1e7ea]

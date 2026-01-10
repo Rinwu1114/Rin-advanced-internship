@@ -17,7 +17,7 @@ export const createOrUpdateUserProfile = async (userData: {
       { merge: true }
     );
   } catch (error) {
-    console.error("Error saving user profile", error);
+    throw error
   }
 };
 
@@ -41,7 +41,7 @@ export const upgradeToPremium = async (userId: string) => {
     try {
         await updateDoc(doc(db, "users", userId),{
             plan: 'Premium',
-            upgradedAt: new Date().toISOString
+            upgradedAt: new Date().toISOString()
         })
         return true
     } catch (error) {
@@ -54,7 +54,7 @@ export const upgradeToPremiumPlus = async (userId: string) => {
     try {
         await updateDoc(doc(db, "users", userId),{
             plan: 'Premium-plus',
-            upgradedAt: new Date().toISOString
+            upgradedAt: new Date().toISOString()
         })
         return true
     } catch (error) {

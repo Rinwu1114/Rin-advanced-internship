@@ -5,7 +5,6 @@ import {
     GoogleAuthProvider,
     signOut,
     sendPasswordResetEmail,
-    signInAnonymously,
     } from "firebase/auth";
 import { auth } from "../firebase/init";
 

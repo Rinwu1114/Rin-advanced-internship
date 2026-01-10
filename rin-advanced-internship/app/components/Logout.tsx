@@ -18,7 +18,6 @@ export default function LogoutButton() {
     await signOut(auth);
     
     dispatch(logout());
-console.log("User logged out")
   };
 
   const handleLoginPopup = () => {

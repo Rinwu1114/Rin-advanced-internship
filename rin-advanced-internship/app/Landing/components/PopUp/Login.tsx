@@ -75,11 +75,12 @@ export default function Login() {
       if (loginGuest.fulfilled.match(result)) {
         dispatch(closePopUp());
         router.push("/for-you");
-        console.log("unwrap result:", result);
-        console.log("Auth user state:", user);
       }
+       if (result.meta?.requestStatus === 'fulfilled') {
+      dispatch(closePopUp());
+      router.push('/for-you');
+    }
     } catch (error) {
-      console.log("guest login failed:", error);
     }
   };
   //sepperated error from file, now error is not showing. bug
