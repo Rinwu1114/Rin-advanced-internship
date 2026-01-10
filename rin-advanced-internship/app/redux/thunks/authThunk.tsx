@@ -3,13 +3,15 @@ import {
   loginWithEmail,
   registerWithEmail,
   logoutUser,
-  loginWithGoogle,
   sendPasswordReset,
-  
 } from "../../firebase/auth";
 import { loginSuccess, PlanType } from "../slices/authState";
 import { auth } from "../../firebase/init";
-import { GoogleAuthProvider, signInAnonymously, signInWithPopup } from "firebase/auth";
+import {
+  GoogleAuthProvider,
+  signInAnonymously,
+  signInWithPopup,
+} from "firebase/auth";
 
 //login thunk
 
@@ -26,60 +28,82 @@ export const loginUser = createAsyncThunk(
   }
 );
 
-const googleProvider = new GoogleAuthProvider()
+const googleProvider = new GoogleAuthProvider();
 
 export const loginGoogle = createAsyncThunk(
   "auth/loginWithGoogle",
   async (_, { dispatch }) => {
-    try{
-      const result = await signInWithPopup(auth, googleProvider)
-      const user = result.user
-    const userData = {
-      uid: user.uid, 
-      email: user.email!,
-      isGuest: false, 
-      plan: 'Basic' as PlanType    
+    try {
+      const result = await signInWithPopup(auth, googleProvider);
+      const user = result.user;
+      const userData = {
+        uid: user.uid,
+        email: user.email!,
+        isGuest: false,
+        plan: "Basic" as PlanType,
+      };
+
+      dispatch(loginSuccess(userData));
+      return userData;
+    } catch (error: any) {
+      console.error("Google login error:", error);
+      throw error;
     }
-
-    dispatch(loginSuccess(userData))
-    return userData
-
-  } catch (error: any) {
-    console.error("Google login error:", error)
-    throw error;
-  }
   }
 );
 
-export const loginGuest = createAsyncThunk("auth/loginAsGuest",
-   async (_, { dispatch }) => {
+export const loginGuest = createAsyncThunk(
+  "auth/loginAsGuest",
+  async (_, { dispatch }) => {
     try {
       const result = await signInAnonymously(auth);
       const user = result.user;
       const userData = {
         uid: user.uid,
-        email: user.email || 'guest@guest.com',
+        email: user.email || "guest@guest.com",
         isGuest: true,
-        plan: 'premium' as PlanType,
+        plan: "Premium" as PlanType,
       };
 
-    dispatch(loginSuccess(userData));
-    return userData;
-  } catch (error) {
-    console.error("Error during anonymous sign-in:", error);
-    throw error;
+      dispatch(loginSuccess(userData));
+      return userData;
+    } catch (error) {
+      console.error("Error during anonymous sign-in:", error);
+      throw error;
+    }
   }
-});
+);
+
+export const loginGuestPlus = createAsyncThunk(
+  "auth/LoginAsGuest",
+  async (_, { dispatch }) => {
+    try {
+      const result = await signInAnonymously(auth);
+      const user = result.user;
+      const userData = {
+        uid: user.uid,
+        email: user.email || "guestPlus@guest.com",
+        isGuest: true,
+        plan: "Premium-plus" as PlanType,
+      };
+      dispatch(loginSuccess(userData));
+      return userData;
+    } catch (error) {
+      console.error("Error during anonymous sign-in:", error);
+      throw error;
+    }
+  }
+);
 
 //register thunk
 
 export const registerUser = createAsyncThunk(
   "auth/registerUser",
   async ({ email, password }: { email: string; password: string }) => {
-   await registerWithEmail(email, password);
+    await registerWithEmail(email, password);
     return {
       success: true,
-      email: email
+      email: email,
     };
   }
 );
