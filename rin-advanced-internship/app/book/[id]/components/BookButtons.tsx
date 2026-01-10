@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/app/redux/store";
 import { openPopUp } from "@/app/redux/slices/loginSlice";
 
-export default function BookButtons({ bookId }: { bookId: string }) {
+export default function BookButtons({ bookInfo }: { bookInfo: any }) {
   const dispatch = useDispatch();
 
   const user = useSelector((state: RootState) => state.AuthState.user);
@@ -17,12 +17,12 @@ export default function BookButtons({ bookId }: { bookId: string }) {
       dispatch(openPopUp());
       return;
     }
-    if (user?.plan === "Basic") {
+    if (user?.plan === "Basic" && bookInfo.subscriptionRequired === true ) {
       router.push(`/choose-plan`);
       return;
     } else {
       {
-        router.push(`/player/${bookId}`);
+        router.push(`/player/${bookInfo.id}`);
       }
     }
   };

@@ -65,7 +65,7 @@ export default function BookInfo({ bookInfo }: { bookInfo: any }) {
           </div>
         </div>
         <div className="book__btn--wrapper flex gap-4">
-          <BookButtons bookId={bookInfo.id} />
+          <BookButtons bookInfo={bookInfo} />
         </div>
         <div
           className="bookmark flex items-center gap-2 mb-10 cursor-pointer text-lg 
