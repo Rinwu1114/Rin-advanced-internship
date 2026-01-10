@@ -16,6 +16,7 @@ import {
 import { RootState } from "@/app/redux/store";
 import FormError from "./FormError";
 import FormSuccess from "./FormSuccess";
+import { setActiveTab } from "@/app/redux/slices/activeSlice";
 
 export default function Login() {
   const dispatch = useDispatch<AppDispatch>();
@@ -47,6 +48,7 @@ export default function Login() {
       const result = await dispatch(loginUser({ email, password }));
       if (loginUser.fulfilled.match(result)) {
         dispatch(closePopUp());
+        dispatch((setActiveTab("for-you")))
         router.push("/for-you");
       }
       if (!loginUser.fulfilled.match(result)) {
@@ -62,6 +64,7 @@ export default function Login() {
       const result = await dispatch(loginGoogle());
       if (loginGoogle.fulfilled.match(result)) {
         dispatch(closePopUp());
+        dispatch((setActiveTab("for-you")))
         router.push("/for-you");
       }
     } catch (error) {
@@ -74,6 +77,7 @@ export default function Login() {
       const result = await dispatch(loginGuest());
       if (loginGuest.fulfilled.match(result)) {
         dispatch(closePopUp());
+        dispatch((setActiveTab("for-you")))
         router.push("/for-you");
       }
        if (result.meta?.requestStatus === 'fulfilled') {
@@ -83,7 +87,7 @@ export default function Login() {
     } catch (error) {
     }
   };
-  //sepperated error from file, now error is not showing. bug
+
   return (
     <>
       <div className="auth__title text-center mb-6 font-bold text-xl text-[#032b41]">
