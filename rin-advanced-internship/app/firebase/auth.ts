@@ -12,7 +12,7 @@ import { auth } from "../firebase/init";
 export const registerWithEmail = async (email: string, password: string) => {
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
     await signOut(auth)
-    return null
+    return userCredential.user
 }
 
 export const loginWithEmail = async (email: string, password: string) => {
@@ -21,7 +21,7 @@ export const loginWithEmail = async (email: string, password: string) => {
 }
 
 export const loginAsGuest = async () => {
-    const userCredential = await signInAnonymously(auth);
+    const userCredential = await signInWithEmailAndPassword(auth, "guest@guest.com", "password123");
     return userCredential.user;
 }
 
