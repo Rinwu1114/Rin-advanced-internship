@@ -3,83 +3,104 @@ import {
   loginWithEmail,
   registerWithEmail,
   logoutUser,
-  loginWithGoogle,
   sendPasswordReset,
-  
+  loginAsGuest
 } from "../../firebase/auth";
 import { loginSuccess, PlanType } from "../slices/authState";
 import { auth } from "../../firebase/init";
-import { GoogleAuthProvider, signInAnonymously, signInWithPopup } from "firebase/auth";
+import {
+  GoogleAuthProvider,
+  signInWithPopup,
+} from "firebase/auth";
+import { createOrUpdateUserProfile } from "@/app/firebase/userService";
 
 //login thunk
 
 export const loginUser = createAsyncThunk(
   "auth/loginUser",
-  async ({ email, password }: { email: string; password: string }) => {
+  async (
+    { email, password }: { email: string; password: string },
+    { dispatch }
+  ) => {
     const firebaseUser = await loginWithEmail(email, password);
-    return {
+    const userData = {
       uid: firebaseUser.uid,
       email: firebaseUser.email!,
       isGuest: false,
       plan: "Basic" as PlanType,
     };
+
+    await createOrUpdateUserProfile(userData);
+    dispatch(loginSuccess(userData));
+    return userData;
   }
 );
 
-const googleProvider = new GoogleAuthProvider()
+const googleProvider = new GoogleAuthProvider();
 
 export const loginGoogle = createAsyncThunk(
   "auth/loginWithGoogle",
   async (_, { dispatch }) => {
-    try{
-      const result = await signInWithPopup(auth, googleProvider)
-      const user = result.user
-    const userData = {
-      uid: user.uid, 
-      email: user.email!,
-      isGuest: false, 
-      plan: 'Basic' as PlanType    
+    try {
+      const result = await signInWithPopup(auth, googleProvider);
+      const firebaseUser = result.user;
+
+      const userData = {
+        uid: firebaseUser.uid,
+        email: firebaseUser.email!,
+        isGuest: false,
+        plan: "Basic" as PlanType,
+      };
+      await createOrUpdateUserProfile(userData);
+      dispatch(loginSuccess(userData));
+      return userData;
+    } catch (error) {
+      console.error("Google login error", error);
+      throw error;
     }
-
-    dispatch(loginSuccess(userData))
-    return userData
-
-  } catch (error: any) {
-    console.error("Google login error:", error)
-    throw error;
-  }
   }
 );
 
-export const loginGuest = createAsyncThunk("auth/loginAsGuest",
-   async (_, { dispatch }) => {
-    try {
-      const result = await signInAnonymously(auth);
-      const user = result.user;
+export const loginGuest = createAsyncThunk(
+  "auth/loginAsGuest",
+  async (_, { dispatch }) => {
+    const firebaseUser = await loginAsGuest();
       const userData = {
-        uid: user.uid,
-        email: user.email || 'guest@guest.com',
+        uid: firebaseUser.uid,
+        email: "guest@guest.com",
         isGuest: true,
-        plan: 'premium' as PlanType,
+        plan: "Premium" as PlanType,
       };
 
-    dispatch(loginSuccess(userData));
-    return userData;
-  } catch (error) {
-    console.error("Error during anonymous sign-in:", error);
-    throw error;
+      await createOrUpdateUserProfile(userData)
+
+      dispatch(loginSuccess(userData));
+      return userData;
+
   }
-});
+);
 
 //register thunk
 
 export const registerUser = createAsyncThunk(
   "auth/registerUser",
   async ({ email, password }: { email: string; password: string }) => {
-   await registerWithEmail(email, password);
+    const firebaseUser = await registerWithEmail(email, password);
+    if(!firebaseUser || ! !firebaseUser.email){
+      throw new Error ("user reg failed")
+    }
+    
+    const userData = {
+      uid: firebaseUser.uid,
+      email: firebaseUser.email || email,
+      isGuest: false,
+      plan: "Basic" as PlanType,
+    }
+    await createOrUpdateUserProfile(userData)
+
     return {
       success: true,
-      email: email
+      email: email,
     };
   }
 );
