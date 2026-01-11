@@ -1,14 +1,16 @@
 "use client";
 
 import { useSelector, useDispatch } from "react-redux";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { RootState } from "@/app/redux/store";
 import { formatTime } from "./FormatTime";
 import useAudioDuration from "@/app/hooks/useAudioDuration";
 import DisplayDuration from "./Duration";
 import { userSeekTo } from "@/app/redux/slices/audioPlayerSlice";
+import { updateBookProgress } from "@/app/firebase/services/libraryServices"
 
 export default function ProgressBar({ playerInfo }: { playerInfo: any }) {
+  const user = useSelector((state: RootState) => state.AuthState.user);
   const { currentTime } = useSelector(
     (state: RootState) => state.AudioBookPlayer
   );
@@ -17,6 +19,7 @@ export default function ProgressBar({ playerInfo }: { playerInfo: any }) {
   const progressPercent = duration > 0 ? (currentTime / duration) * 100 : 0;
   const [seeking, setSeeking] = useState(false)
   const [tempTime, setTempTime] = useState(0) 
+  const isFinished = progressPercent >= 99.9;
   
   
   const handleSeeking = () =>{
@@ -32,7 +35,50 @@ export default function ProgressBar({ playerInfo }: { playerInfo: any }) {
     dispatch(userSeekTo(tempTime))
     setSeeking(false)
   }
+
+ useEffect(() => {
+  const updateFirestoreBookProgress = async () => {
+    
+    if (!user || !playerInfo?.id) return;
+    
+    try {
+      console.log("💾 Saving progress:", progressPercent, "%", "Finished?", isFinished);
+      
+      await updateBookProgress(
+        user.uid,
+        playerInfo.id,
+        progressPercent,
+        isFinished
+      );
+
+    } catch (error) {
+      console.error("Failed to save progress:", error);
+    }
+  };
   
+ 
+  const shouldUpdate = 
+    progressPercent === 100 || 
+    Math.abs(progressPercent % 10) < 0.01 || 
+    isFinished;
+  
+  if (shouldUpdate) {
+    updateFirestoreBookProgress();
+  }
+}, [progressPercent, user, playerInfo?.id, isFinished]);
+ 
+useEffect(() => {
+  console.log("🔍 DEBUG - Current state:", {
+    userExists: !!user,
+    userId: user?.uid,
+    bookId: playerInfo?.id,
+    progress: progressPercent,
+    isFinished,
+    // Check Firestore document exists
+    firestorePath: user && playerInfo?.id ? 
+      `users/${user.uid}/library/${playerInfo.id}` : 'N/A'
+  });
+}, [progressPercent]);
 
   return (
     <div className="audio__progress--wrapper w-1/3 flex items-center gap-4">

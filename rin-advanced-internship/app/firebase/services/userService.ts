@@ -1,5 +1,5 @@
 import { doc, setDoc, getDoc, updateDoc } from "firebase/firestore";
-import { db } from "./init";
+import { db } from "../init";
 
 export const createOrUpdateUserProfile = async (userData: {
   uid: string;

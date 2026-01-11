@@ -12,7 +12,7 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
 } from "firebase/auth";
-import { createOrUpdateUserProfile } from "@/app/firebase/userService";
+import { createOrUpdateUserProfile } from "@/app/firebase/services/userService";
 
 //login thunk
 
