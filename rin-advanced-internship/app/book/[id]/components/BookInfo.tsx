@@ -2,12 +2,14 @@ import { IoIosStarOutline } from "react-icons/io";
 import { GoClock } from "react-icons/go";
 import { IoMicOutline } from "react-icons/io5";
 import { HiOutlineLightBulb } from "react-icons/hi";
-import { CiBookmark } from "react-icons/ci";
 import BookTitle from "./BookTitle";
 import BookButtons from "./BookButtons";
 import DisplayDuration from "@/app/player/[id]/components/Duration";
+import SaveToLibrary from "./SaveToLibrary";
 
 export default function BookInfo({ bookInfo }: { bookInfo: any }) {
+
+
   return (
     <div className="book__wrapper flex max-[1000px]:gap-4 gap-8 max-[1000px]:flex-col flex-row">
       <div className="book w-full max-[1000px]:order-1">
@@ -67,15 +69,7 @@ export default function BookInfo({ bookInfo }: { bookInfo: any }) {
         <div className="book__btn--wrapper flex gap-4">
           <BookButtons bookInfo={bookInfo} />
         </div>
-        <div
-          className="bookmark flex items-center gap-2 mb-10 cursor-pointer text-lg 
-            text-[#0365f2] font-medium transition duration-150 hover:text-[#044298]"
-        >
-          <div className="bookmark__icon flex">
-            <CiBookmark className="w-5 h-5" />
-          </div>
-          <div className="bookmark__text">Add title to My Library</div>
-        </div>
+        <SaveToLibrary bookInfo={bookInfo}/>
         <div className="book__second--title text-lg text-[#032b41] mb-4 font-semibold">
           What's it about?
         </div>
