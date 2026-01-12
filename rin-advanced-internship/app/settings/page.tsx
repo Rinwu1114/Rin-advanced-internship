@@ -6,7 +6,7 @@ import LoggedInSettings from "./components/LoggedinSettings";
 import LoggedOut from "./components/LoggedOut";
 import PopUp from "../Landing/components/PopUp/PopUp";
 import Sidebar from "../components/Sidebar";
-import Search from "../components/Search";
+import Search from "../components/SearchComponents/Search";
 
 export default function SettingsPage() {
 
