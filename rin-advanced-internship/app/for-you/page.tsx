@@ -1,5 +1,5 @@
 import Sidebar from "../components/Sidebar";
-import Search from "../components/Search";
+import Search from "../components/SearchComponents/Search";
 import Selected from "./components/Selected";
 import Recommended from "./components/Recommended";
 import Suggested from "./components/Suggested";

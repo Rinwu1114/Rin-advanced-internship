@@ -1,5 +1,5 @@
 import Sidebar from "@/app/components/Sidebar";
-import Search from "@/app/components/Search";
+import Search from "@/app/components/SearchComponents/Search";
 import BookInfo from "./components/BookInfo";
 import PopUp from "@/app/Landing/components/PopUp/PopUp";
 

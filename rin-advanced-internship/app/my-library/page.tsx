@@ -6,7 +6,7 @@ import { RootState } from "@/app/redux/store";
 import { useSelector } from "react-redux";
 import Sidebar from "../components/Sidebar";
 import PopUp from "../Landing/components/PopUp/PopUp";
-import Search from "../components/Search";
+import Search from "../components/SearchComponents/Search";
 
 export default function MyLibrary() {
 const user = useSelector((state: RootState) => state.AuthState.user);

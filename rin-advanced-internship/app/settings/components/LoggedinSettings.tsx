@@ -18,7 +18,7 @@ export default function LoggedInSettings() {
             <div className="setting__text text-[#032b41]">
                 { user ? user.plan : null}
                 
-                </div>
+                </div>  
                 { user?.plan === "Basic" ? <button className="btn justify-center max-w-[150px]"
                         onClick={() => router.push(`/choose-plan`)}>
                             Upgrade to Premium

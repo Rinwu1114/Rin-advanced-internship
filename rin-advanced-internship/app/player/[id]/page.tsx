@@ -1,5 +1,5 @@
 import Sidebar from "@/app/components/Sidebar";
-import Search from "@/app/components/Search";
+import Search from "@/app/components/SearchComponents/Search";
 import Summary from "./components/Summary"
 import AudioPlayer from "./components/AudioPlayer"
 
