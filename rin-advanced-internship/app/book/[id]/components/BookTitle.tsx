@@ -8,7 +8,8 @@ export default function BookTitle({ bookInfo }: { bookInfo: any }) {
 
   return (
     <>
-      {user?.plan === "Basic" && bookInfo.subscriptionRequired === true ? (
+      {bookInfo.subscriptionRequired === true
+      && (user === null || user.plan === "Basic") ? (
         <div className="book__title text-[#032b41] mb-4 font-semibold text-[32px]">
           {bookInfo.title} (Premium)
         </div>

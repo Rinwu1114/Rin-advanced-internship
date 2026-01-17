@@ -2,8 +2,15 @@ import Link from "next/link";
 import { FaCirclePlay } from "react-icons/fa6";
 import DisplayDuration from "@/app/player/[id]/components/Duration";
 
-export default function selected({ selectedBook }: { selectedBook: any }) {
-  const bookInfo = selectedBook[0];
+async function fetchBook(){
+        const res =  await fetch('https://us-central1-summaristt.cloudfunctions.net/getBooks?status=selected')
+        return res.json()
+    }
+
+export default async function selected() {
+
+    const selectedBook = await fetchBook()
+    const bookInfo = selectedBook[0];
 
   return (
     <div>

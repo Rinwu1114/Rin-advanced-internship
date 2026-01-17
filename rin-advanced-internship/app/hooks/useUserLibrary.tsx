@@ -8,13 +8,10 @@ import type { bookData } from "@/app/firebase/services/libraryServices"
 
 interface useUserLibraryResult {
     books: bookData[];
-    error: string | null
-    refresh: () => Promise<void>
 }
 
 export const useUserLibrary = (): useUserLibraryResult => {
     const [books, setBooks] = useState<bookData[]>([]);
-    const [error, setError] = useState<string|null>(null)
 
     const user = useSelector((state: RootState) => state.AuthState.user)
 
@@ -23,13 +20,11 @@ export const useUserLibrary = (): useUserLibraryResult => {
             setBooks([])
             return
         }
-        setError(null)
-
+        
         try {
             const fetchedBooks = await getUserLibrary(user.uid)
             setBooks(fetchedBooks)
         } catch (err: any) {
-            setError(err.message)
             setBooks([])
         }
     }
@@ -40,7 +35,6 @@ export const useUserLibrary = (): useUserLibraryResult => {
 
     return {
         books, 
-        error,
-        refresh: loadBooks
+        
     }
 }

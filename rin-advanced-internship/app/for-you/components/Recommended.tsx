@@ -1,10 +1,13 @@
 import BookCard from "./BookCard";
 
-export default function Recommended({
-  recommendedBooks,
-}: {
-  recommendedBooks: any;
-}) {
+async function fetchRecommended(){
+    const res = await fetch('https://us-central1-summaristt.cloudfunctions.net/getBooks?status=recommended')
+    return res.json()
+}
+
+export default async function Recommended() {
+     const recommendedBooks = await fetchRecommended()
+
   return (
     <div>
       <div className="for-you__title font-bold text-[#032b41] mb-4 text-[22px]">
