@@ -1,6 +1,6 @@
 import { doc, setDoc, collection, getDocs, updateDoc, getDoc } from "firebase/firestore"
 import { db } from '@/app/firebase/init'
-import BookTitle from "@/app/book/[id]/components/BookTitle"
+import BookTitle from "@/app/(main-app)/book/[id]/components/BookTitle"
 
 export interface bookData {
     id: string,

@@ -1,6 +1,6 @@
 import Landing from "./Landing/page";
-import Nav from "./components/Navbar";
-import Footer from "./components/Footer";
+import Nav from "./(main-app)/components/Navbar";
+import Footer from "./(main-app)/components/Footer";
 
 export default function Main() {
   return (
