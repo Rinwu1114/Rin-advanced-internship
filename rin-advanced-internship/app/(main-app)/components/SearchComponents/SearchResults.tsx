@@ -2,13 +2,16 @@ import { useEffect, useState } from "react"
 import Link from "next/link"
 import { CiClock2 } from "react-icons/ci";
 import DisplayDuration from "@/app/(main-app)/player/[id]/components/Duration";
+import SearchLoadingSkeleton from "../LoadingComponents/SearchLoadingSkeleton";
 
 interface SearchResultsProps {
     searchTerm: string
+    isLoading: boolean
 }
 
-export default function SearchResults({searchTerm}: SearchResultsProps){
+export default function SearchResults({searchTerm, isLoading}: SearchResultsProps){
     const [results, setResults] = useState([])
+    const [isFetching, setIsFetching] = useState(false)
 
     useEffect(() => {
         if(!searchTerm){
@@ -17,27 +20,33 @@ export default function SearchResults({searchTerm}: SearchResultsProps){
         }
         
         const fetchSearch = async () =>{
+            setIsFetching(true)
             try{
                 const response = await fetch(`https://us-central1-summaristt.cloudfunctions.net/getBooksByAuthorOrTitle?search=${encodeURIComponent(searchTerm)}`)
                 const data = await response.json()
                 setResults(data)
             } catch(error) {
                 console.error("Search failed", error)
+            } finally {
+                setIsFetching(false)
             }
         }
         fetchSearch()
     }, [searchTerm])
-    if(!searchTerm){
+
+    if(!searchTerm && !isLoading){
         return null
     }
-if (results.length === 0) {
+    if(isLoading || isFetching){
+        return <SearchLoadingSkeleton />
+    }
+    if (results.length === 0) {
     return(
         <div className="search__books--wrapper z-25 flex flex-col max-w-110
         w-full max-h-[640px] ml-auto overflow-y-auto p-4 absolute
         top-[104px] right-[24px] bg-[#fff] border border-[#e1e7ea]">No books found</div>
     )
 }
-console.log(results)
     return(
         <div className="search__books--wrapper z-25 flex flex-col max-w-110
         w-full max-h-[640px] ml-auto overflow-y-auto p-4 absolute

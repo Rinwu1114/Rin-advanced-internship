@@ -11,15 +11,34 @@ import { HiOutlineXMark } from "react-icons/hi2";
 export default function Search() {
   const [searchTerm, setSearchTerm] = useState("");
   const [debounce, setDebounce] = useState("");
+  const [isLoading, setIsLoading] = useState(false)
 
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setDebounce(searchTerm);
-    }, 300);
-    return () => {
-      clearTimeout(timeout);
-    };
-  }, [searchTerm]);
+useEffect(() => {
+  if (searchTerm) {
+    setIsLoading(true)
+  } 
+  else {
+    setIsLoading(false)
+    setDebounce("")
+  }
+  const timeout = setTimeout(() => {
+    setDebounce(searchTerm)
+    setIsLoading(false)
+  }, 300)
+
+  return() =>{
+    clearTimeout(timeout)
+  }
+}, [searchTerm])
+
+  // useEffect(() => {
+  //   const timeout = setTimeout(() => {
+  //     setDebounce(searchTerm);
+  //   }, 300);
+  //   return () => {
+  //     clearTimeout(timeout);
+  //   };
+  // }, [searchTerm]);
 
   const handleClear = () => {
     setSearchTerm("");
@@ -59,7 +78,7 @@ export default function Search() {
             </div>
           </div>
         </div>
-        <SearchResults searchTerm={debounce} />
+        <SearchResults searchTerm={debounce} isLoading={isLoading} />
       </div>
     </div>
   );
