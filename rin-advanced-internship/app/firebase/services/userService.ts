@@ -5,7 +5,7 @@ export const createOrUpdateUserProfile = async (userData: {
   uid: string;
   email: string;
   isGuest: boolean;
-  plan: "Basic" | "Premium" | "Premium-plus";
+  plan: "Basic" | "Premium" | "Premium-Plus";
 }) => {
   try {
     await setDoc(
@@ -53,7 +53,7 @@ export const upgradeToPremium = async (userId: string) => {
 export const upgradeToPremiumPlus = async (userId: string) => {
     try {
         await updateDoc(doc(db, "users", userId),{
-            plan: 'Premium-plus',
+            plan: 'Premium-Plus',
             upgradedAt: new Date().toISOString()
         })
         return true

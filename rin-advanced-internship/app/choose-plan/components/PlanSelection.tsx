@@ -1,15 +1,48 @@
 "use client";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/app/redux/store";
 import { makeStore } from "@/app/redux/store";
 import { setActivePlan } from "@/app/redux/slices/activePlan";
-import { openPopUp } from "@/app/redux/slices/loginSlice"
+import { openPopUp } from "@/app/redux/slices/loginSlice";
+import { createCheckoutSession } from "../../firebase/stripePayments";
+import LoadingSpinner from "@/app/(main-app)/components/LoadingComponents/LoadingSpinner";
 
 export default function PlanSelection() {
   const dispatch = useDispatch();
+  const user = useSelector((state: RootState) => state.AuthState.user);
+  const [loading, isLoading] = useState(false);
   type StoreState = ReturnType<ReturnType<typeof makeStore>["getState"]>;
   const active = useSelector(
-    (state: StoreState) => state.ActivePlan.ActivePlan
+    (state: StoreState) => state.ActivePlan.ActivePlan as "yearly" | "monthly"
   );
+
+  const PRICE_IDS = {
+    yearly: "price_1Sv4RpI5ygUw90U3Z1N3JLRv",
+    monthly: "price_1Sv4Q7I5ygUw90U3DyK4cikg",
+  };
+
+
+console.log(user)
+
+
+
+  const handlePayment = async () => {
+    if (!user) {
+      dispatch(openPopUp()); 
+      return;
+    }
+
+    isLoading(true);
+    try {
+      const selectedPriceId =
+        active === "yearly" ? PRICE_IDS.yearly : PRICE_IDS.monthly;
+      await createCheckoutSession(user.uid, selectedPriceId);
+    } catch (error) {
+      console.error("Payment initiation failed", error);
+      isLoading(false);
+    }
+  };
 
   return (
     <>
@@ -96,22 +129,26 @@ export default function PlanSelection() {
       items-center gap-4"
       >
         <span className="btn__wrapper">
-          <button className="btn justify-center" style={{ width: "300px" }}
-          onClick={() => dispatch(openPopUp())}>
-            {
-                active === "yearly" ? <span>Start your free 7-day trial</span> 
-                : <span>Start your first month</span>
-            }
+          <button
+            className="btn justify-center"
+            style={{ width: "300px" }}
+            onClick={handlePayment}
+          >
+            {loading ? (
+              <span className="animate-spin"><LoadingSpinner /></span>
+            ) : active === "yearly" ? (
+              <span>Start your free 7-day trial</span>
+            ) : (
+              <span>Start your first month</span>
+            )}
           </button>
         </span>
-        {
-            active === 'yearly' ? <div className="disclaimer text-xs text-[#6b757b] text-center">
-          Cancel your trial at any time before it ends, and you won't be
-          charged.
-        </div> : <div className="disclaimer text-xs text-[#6b757b] text-center">
-          30-day money back guarantee, no questions asked.
+
+        <div className="disclaimer text-xs text-[#6b757b] text-center">
+          {active === "yearly"
+            ? "Cancel your trial at any time before it ends, and you won't be charged."
+            : "30-day money back guarantee, no questions asked."}
         </div>
-        }
       </div>
     </>
   );
