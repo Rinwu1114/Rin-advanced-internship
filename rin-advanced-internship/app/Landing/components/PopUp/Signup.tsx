@@ -14,6 +14,7 @@ export default function Signup() {
   const dispatch = useDispatch<AppDispatch>();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, isLoading] = useState(false)
   const {
     formErrorCode,
     setFormErrorCode,
@@ -35,9 +36,11 @@ export default function Signup() {
       setFormErrorCode(errorCode);
       return;
     }
+    isLoading(true)
     try {
       const result = await dispatch(registerUser({ email, password }));
       if (registerUser.fulfilled.match(result)) {
+        isLoading(false)
         setFormSuccessCode(1); // reg success code
         setTimeout(() =>{
           dispatch(switchMode("login"));
@@ -46,12 +49,15 @@ export default function Signup() {
         const error = result.error;
         if (error?.message?.includes("email-already-in-use")) {
           setFormErrorCode(7);
+          isLoading(false)
         } else {
           setFormErrorCode(8);
+          isLoading(false)
         }
       }
     } catch (error) {
       setFormErrorCode(8);
+      isLoading(false)
     }
   };
 

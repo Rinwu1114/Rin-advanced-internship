@@ -1,6 +1,6 @@
 "use client";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import type { AppDispatch } from "@/app/redux/store";
 import { switchMode, closePopUp } from "@/app/redux/slices/loginSlice";
 import { formValidation } from "@/app/hooks/FormValidation";
@@ -13,22 +13,22 @@ import {
   loginGuest,
   loginGoogle,
 } from "@/app/redux/thunks/authThunk";
-import { RootState } from "@/app/redux/store";
 import FormError from "./FormError";
 import FormSuccess from "./FormSuccess";
 import { setActiveTab } from "@/app/redux/slices/activeSlice";
+import LoadingSpinner from "@/app/(main-app)/components/LoadingComponents/LoadingSpinner";
 
 export default function Login() {
   const dispatch = useDispatch<AppDispatch>();
+  const [loading, isLoading] = useState(false);
   const router = useRouter();
   const switchToSignUp = () => {
     dispatch(switchMode("signup"));
   };
-  const user = useSelector((state: RootState) => state.AuthState.user);
 
   const switchToReset = () => {
-    dispatch(switchMode('reset'))
-  }
+    dispatch(switchMode("reset"));
+  };
 
   const { formErrorCode, setFormErrorCode, validateBoth, formSuccessCode } =
     formValidation();
@@ -44,47 +44,54 @@ export default function Login() {
       setFormErrorCode(errorCode);
       return;
     }
+    isLoading(true);
     try {
       const result = await dispatch(loginUser({ email, password }));
       if (loginUser.fulfilled.match(result)) {
         dispatch(closePopUp());
-        dispatch((setActiveTab("for-you")))
+        dispatch(setActiveTab("for-you"));
         router.push("/for-you");
       }
       if (!loginUser.fulfilled.match(result)) {
         setFormErrorCode(4);
+        isLoading(false);
       }
     } catch (error) {
       setFormErrorCode(5);
+      isLoading(false);
     }
   };
 
   const handleGoogleLogin = async () => {
+    isLoading(true);
     try {
       const result = await dispatch(loginGoogle());
       if (loginGoogle.fulfilled.match(result)) {
         dispatch(closePopUp());
-        dispatch((setActiveTab("for-you")))
+        dispatch(setActiveTab("for-you"));
         router.push("/for-you");
       }
     } catch (error) {
+      isLoading(false);
       console.error("Problem logging in with Google:", error);
     }
   };
 
   const handleGuestLogin = async () => {
+    isLoading(true);
     try {
       const result = await dispatch(loginGuest());
       if (loginGuest.fulfilled.match(result)) {
         dispatch(closePopUp());
-        dispatch((setActiveTab("for-you")))
+        dispatch(setActiveTab("for-you"));
         router.push("/for-you");
       }
-       if (result.meta?.requestStatus === 'fulfilled') {
-      dispatch(closePopUp());
-      router.push('/for-you');
-    }
+      if (result.meta?.requestStatus === "fulfilled") {
+        dispatch(closePopUp());
+        router.push("/for-you");
+      }
     } catch (error) {
+      isLoading(false);
     }
   };
 
@@ -107,7 +114,13 @@ export default function Login() {
         >
           <MdPerson className="w-8 h-8" />
         </figure>
-        <div>Login as a Guest</div>
+        {loading ? (
+          <span className="animate-spin">
+            <LoadingSpinner />
+          </span>
+        ) : (
+          <div>Login as a Guest</div>
+        )}
       </button>
       <div
         className="auth__seperator flex items-center my-4
@@ -130,7 +143,13 @@ export default function Login() {
         >
           <FcGoogle className="w-7 h-7" />
         </figure>
-        <div>Login with Google</div>
+        {loading ? (
+          <span className="animate-spin">
+            <LoadingSpinner />
+          </span>
+        ) : (
+          <div>Login with Google</div>
+        )}
       </button>
       <div
         className="auth__seperator flex items-center my-4
@@ -159,13 +178,19 @@ export default function Login() {
           onChange={(e) => setPassword(e.target.value)}
         />
         <button className="btn flex justify-center" onClick={handleEmailLogin}>
-          <span>Login</span>
+          {loading ? (
+            <span className="animate-spin">
+              <LoadingSpinner />
+            </span>
+          ) : (
+           <span>Login</span>
+          )}
         </button>
       </form>
       <div
         className="auth__forgot--password text-center text-[#116be9] font-light text-sm
                 cursor-pointer mx-auto mt-4 "
-      onClick={switchToReset}
+        onClick={switchToReset}
       >
         Forgot your password?
       </div>

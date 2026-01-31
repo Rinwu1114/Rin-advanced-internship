@@ -16,17 +16,6 @@ export default function SaveToLibrary({ bookInfo }: { bookInfo: any }) {
 
   const [isAdded, setIsAdded] = useState(false);
 
-  // const checkIfBookInLibrary = async () => {
-  //     const isAdded = await checkBook(user.uid, bookInfo.id)
-  //     setInLibrary(isAdded)
-  // }
-
-  // useEffect(() => {
-  //     if (user) {
-  //         checkIfBookInLibrary()
-  //     }
-  // }, [user])
-
   const handleAddBook = async () => {
     if (!user) {
       dispatch(openPopUp());
