@@ -8,8 +8,6 @@ import DisplayDuration from "@/app/(main-app)/player/[id]/components/Duration";
 import SaveToLibrary from "./SaveToLibrary";
 
 export default function BookInfo({ bookInfo }: { bookInfo: any }) {
-
-
   return (
     <div className="book__wrapper flex max-[1000px]:gap-4 gap-8 max-[1000px]:flex-col flex-row">
       <div className="book w-full max-[1000px]:order-1">
@@ -69,7 +67,7 @@ export default function BookInfo({ bookInfo }: { bookInfo: any }) {
         <div className="book__btn--wrapper flex gap-4">
           <BookButtons bookInfo={bookInfo} />
         </div>
-        <SaveToLibrary bookInfo={bookInfo}/>
+        <SaveToLibrary bookInfo={bookInfo} />
         <div className="book__second--title text-lg text-[#032b41] mb-4 font-semibold">
           What's it about?
         </div>

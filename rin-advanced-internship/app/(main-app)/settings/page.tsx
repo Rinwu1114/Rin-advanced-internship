@@ -11,8 +11,7 @@ const LoggedInSettings = nextDynamic(
 );
 
 export default async function SettingsPage() {
-
- await new Promise((resolve) => setTimeout(resolve , 100))
+  await new Promise((resolve) => setTimeout(resolve, 100));
 
   return (
     <div className="row">

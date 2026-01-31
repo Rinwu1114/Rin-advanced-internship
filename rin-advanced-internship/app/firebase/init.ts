@@ -15,11 +15,11 @@ const firebaseConfig = {
   storageBucket: "summarist-internship-52e88.firebasestorage.app",
   messagingSenderId: "589538935040",
   appId: "1:589538935040:web:bc65b3e1653b60e10733e5",
-  measurementId: "G-JGZ94N84KT"
+  measurementId: "G-JGZ94N84KT",
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 const analytics = getAnalytics(app);
-export const db = getFirestore(app)
+export const db = getFirestore(app);

@@ -44,10 +44,10 @@ export default function Loading() {
                     </div>
                   </div>
                   <div className="loading__content flex gap-4">
-                  {Array.from({ length: 6 }).map((_, i) => (
-                    <BookCardSkeleton key={i} />
-                  ))}
-                </div>
+                    {Array.from({ length: 6 }).map((_, i) => (
+                      <BookCardSkeleton key={i} />
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>

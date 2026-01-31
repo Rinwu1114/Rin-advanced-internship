@@ -5,17 +5,19 @@ export default function Reviews() {
     <section id="reviews">
       <div className="row">
         <div className="container mx-auto">
-          <div className="md:text-3xl text-2xl text-[#032b41] text-center mb-8 font-bold">What our members say</div>
+          <div className="md:text-3xl text-2xl text-[#032b41] text-center mb-8 font-bold">
+            What our members say
+          </div>
           <div className="max-w-[600px] mx-auto">
             <div className="review bg-[#fff3d7] p-4 mb-8 rounded-sm font-light">
               <div className="text-[#032b41] flex gap-2 mb-2">
                 <div className="review__name">Hanna M.</div>
                 <div className="flex">
-                  <BsStarFill className="w-4 h-4 fill-[#0564f1]"/>
-                  <BsStarFill className="w-4 h-4 fill-[#0564f1]"/>
-                  <BsStarFill className="w-4 h-4 fill-[#0564f1]"/>
-                  <BsStarFill className="w-4 h-4 fill-[#0564f1]"/>
-                  <BsStarFill className="w-4 h-4 fill-[#0564f1]"/>
+                  <BsStarFill className="w-4 h-4 fill-[#0564f1]" />
+                  <BsStarFill className="w-4 h-4 fill-[#0564f1]" />
+                  <BsStarFill className="w-4 h-4 fill-[#0564f1]" />
+                  <BsStarFill className="w-4 h-4 fill-[#0564f1]" />
+                  <BsStarFill className="w-4 h-4 fill-[#0564f1]" />
                 </div>
               </div>
               <div className="text-[#394547] tracking-[0.3px] leading-[1.4] md:text-base text-sm">
@@ -28,11 +30,11 @@ export default function Reviews() {
               <div className="text-[#032b41] flex gap-2 mb-2">
                 <div className="review__name">David B.</div>
                 <div className="flex">
-                  <BsStarFill className="w-4 h-4 fill-[#0564f1]"/>
-                  <BsStarFill className="w-4 h-4 fill-[#0564f1]"/>
-                  <BsStarFill className="w-4 h-4 fill-[#0564f1]"/>
-                  <BsStarFill className="w-4 h-4 fill-[#0564f1]"/>
-                  <BsStarFill className="w-4 h-4 fill-[#0564f1]"/>
+                  <BsStarFill className="w-4 h-4 fill-[#0564f1]" />
+                  <BsStarFill className="w-4 h-4 fill-[#0564f1]" />
+                  <BsStarFill className="w-4 h-4 fill-[#0564f1]" />
+                  <BsStarFill className="w-4 h-4 fill-[#0564f1]" />
+                  <BsStarFill className="w-4 h-4 fill-[#0564f1]" />
                 </div>
               </div>
               <div className="text-[#394547] tracking-[0.3px] leading-[1.4] md:text-base text-sm">
@@ -45,11 +47,11 @@ export default function Reviews() {
               <div className="text-[#032b41] flex gap-2 mb-2">
                 <div className="review__name">Nathan S.</div>
                 <div className="flex">
-                  <BsStarFill className="w-4 h-4 fill-[#0564f1]"/>
-                  <BsStarFill className="w-4 h-4 fill-[#0564f1]"/>
-                  <BsStarFill className="w-4 h-4 fill-[#0564f1]"/>
-                  <BsStarFill className="w-4 h-4 fill-[#0564f1]"/>
-                  <BsStarFill className="w-4 h-4 fill-[#0564f1]"/>
+                  <BsStarFill className="w-4 h-4 fill-[#0564f1]" />
+                  <BsStarFill className="w-4 h-4 fill-[#0564f1]" />
+                  <BsStarFill className="w-4 h-4 fill-[#0564f1]" />
+                  <BsStarFill className="w-4 h-4 fill-[#0564f1]" />
+                  <BsStarFill className="w-4 h-4 fill-[#0564f1]" />
                 </div>
               </div>
               <div className="text-[#394547] tracking-[0.3px] leading-[1.4] md:text-base text-sm">
@@ -63,11 +65,11 @@ export default function Reviews() {
               <div className="text-[#032b41] flex gap-2 mb-2">
                 <div className="review__name">Ryan R.</div>
                 <div className="flex">
-                  <BsStarFill className="w-4 h-4 fill-[#0564f1]"/>
-                  <BsStarFill className="w-4 h-4 fill-[#0564f1]"/>
-                  <BsStarFill className="w-4 h-4 fill-[#0564f1]"/>
-                  <BsStarFill className="w-4 h-4 fill-[#0564f1]"/>
-                  <BsStarFill className="w-4 h-4 fill-[#0564f1]"/>
+                  <BsStarFill className="w-4 h-4 fill-[#0564f1]" />
+                  <BsStarFill className="w-4 h-4 fill-[#0564f1]" />
+                  <BsStarFill className="w-4 h-4 fill-[#0564f1]" />
+                  <BsStarFill className="w-4 h-4 fill-[#0564f1]" />
+                  <BsStarFill className="w-4 h-4 fill-[#0564f1]" />
                 </div>
               </div>
               <div className="text-[#394547] tracking-[0.3px] leading-[1.4] md:text-base text-sm">

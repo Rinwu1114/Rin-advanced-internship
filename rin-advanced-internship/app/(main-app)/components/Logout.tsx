@@ -16,7 +16,7 @@ export default function LogoutButton() {
 
   const handleLogout = async () => {
     await signOut(auth);
-    
+
     dispatch(logout());
   };
 
@@ -56,5 +56,5 @@ export default function LogoutButton() {
       </div>
       <div className="sidebar__link--text text-[#032b41]">Login</div>
     </div>
-  ); 
+  );
 }

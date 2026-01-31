@@ -9,7 +9,6 @@ import Login from "./Login";
 import ResetPassword from "./ResetPassword";
 
 export default function PopUp() {
-  
   const isOpen = useSelector((state: RootState) => state.loginPopUp.isOpen);
   const modeSwitch = useSelector((state: RootState) => state.loginPopUp.mode);
   const mode = modeSwitch;

@@ -4,14 +4,11 @@ import {
   registerWithEmail,
   logoutUser,
   sendPasswordReset,
-  loginAsGuest
+  loginAsGuest,
 } from "../../firebase/auth";
 import { loginSuccess, PlanType } from "../slices/authState";
 import { auth } from "../../firebase/init";
-import {
-  GoogleAuthProvider,
-  signInWithPopup,
-} from "firebase/auth";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { createOrUpdateUserProfile } from "@/app/firebase/services/userService";
 
 //login thunk
@@ -64,9 +61,9 @@ export const loginGoogle = createAsyncThunk(
 export const loginGuest = createAsyncThunk(
   "auth/loginAsGuest",
   async (_, { dispatch }) => {
-    try{
+    try {
       const firebaseUser = await loginAsGuest();
-    const userData = {
+      const userData = {
         uid: firebaseUser.uid,
         email: "guest@guest.com",
         isGuest: true,
@@ -74,12 +71,11 @@ export const loginGuest = createAsyncThunk(
       };
       await createOrUpdateUserProfile(userData);
 
-      dispatch(loginSuccess(userData))
-        return userData;
-      } catch (error) {
+      dispatch(loginSuccess(userData));
+      return userData;
+    } catch (error) {
       throw error;
-      }
-
+    }
   }
 );
 
@@ -89,17 +85,17 @@ export const registerUser = createAsyncThunk(
   "auth/registerUser",
   async ({ email, password }: { email: string; password: string }) => {
     const firebaseUser = await registerWithEmail(email, password);
-    if(!firebaseUser || !firebaseUser.email){
-      throw new Error ("user reg failed")
+    if (!firebaseUser || !firebaseUser.email) {
+      throw new Error("user reg failed");
     }
-    
+
     const userData = {
       uid: firebaseUser.uid,
       email: firebaseUser.email || email,
       isGuest: false,
       plan: "Basic" as PlanType,
-    }
-    await createOrUpdateUserProfile(userData)
+    };
+    await createOrUpdateUserProfile(userData);
 
     return {
       success: true,

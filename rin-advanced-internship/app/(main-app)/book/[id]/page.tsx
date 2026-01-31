@@ -1,6 +1,5 @@
 import BookInfo from "./components/BookInfo";
 
-
 export default async function Book({
   params,
 }: {
@@ -13,11 +12,11 @@ export default async function Book({
 
   return (
     <>
-          <div className="row">
-            <div className="container">
-              <BookInfo bookInfo={bookInfo} />
-            </div>
-          </div>
+      <div className="row">
+        <div className="container">
+          <BookInfo bookInfo={bookInfo} />
+        </div>
+      </div>
     </>
   );
 }

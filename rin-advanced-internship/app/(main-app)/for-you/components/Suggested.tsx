@@ -8,8 +8,7 @@ async function fetchSuggested() {
 }
 
 export default async function Suggested() {
-  
-   const suggestedBooks = await fetchSuggested()
+  const suggestedBooks = await fetchSuggested();
 
   return (
     <div>

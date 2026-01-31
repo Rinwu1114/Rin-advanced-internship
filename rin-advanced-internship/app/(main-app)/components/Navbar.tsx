@@ -12,16 +12,22 @@ export default function Nav() {
           <li className="text-[#032b41] cursor-pointer transition-colors duration-100 hover:text-[#2bd97c] --login">
             Login
           </li>
-          <li className="text-[#032b41] cursor-not-allowed transition-colors duration-100 hover:text-[#2bd97c]
-          min-[576px]:block hidden --mobile">
+          <li
+            className="text-[#032b41] cursor-not-allowed transition-colors duration-100 hover:text-[#2bd97c]
+          min-[576px]:block hidden --mobile"
+          >
             About
           </li>
-          <li className="text-[#032b41] cursor-not-allowed transition-colors duration-100 hover:text-[#2bd97c]
-          min-[576px]:block hidden --mobile">
+          <li
+            className="text-[#032b41] cursor-not-allowed transition-colors duration-100 hover:text-[#2bd97c]
+          min-[576px]:block hidden --mobile"
+          >
             Contact
           </li>
-          <li className="text-[#032b41] cursor-not-allowed transition-colors duration-100 hover:text-[#2bd97c]
-          min-[576px]:block hidden --mobile">
+          <li
+            className="text-[#032b41] cursor-not-allowed transition-colors duration-100 hover:text-[#2bd97c]
+          min-[576px]:block hidden --mobile"
+          >
             Help
           </li>
         </ul>
