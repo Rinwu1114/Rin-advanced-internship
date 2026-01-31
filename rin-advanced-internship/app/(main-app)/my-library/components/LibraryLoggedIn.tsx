@@ -9,16 +9,14 @@ export default function LibraryLoggedIn() {
   const user = useSelector((state: RootState) => state.AuthState.user);
   return (
     <>
-      
-          {user ? (
-            <>
-              <SavedBooks />
-              <FinishedBooks />
-            </>
-          ) : (
-            <LibraryLoggedOut />
-          )}
-
+      {user ? (
+        <>
+          <SavedBooks />
+          <FinishedBooks />
+        </>
+      ) : (
+        <LibraryLoggedOut />
+      )}
     </>
   );
 }

@@ -7,83 +7,64 @@ import { formatTime } from "./FormatTime";
 import useAudioDuration from "@/app/hooks/useAudioDuration";
 import DisplayDuration from "./Duration";
 import { userSeekTo } from "@/app/redux/slices/audioPlayerSlice";
-import { updateBookProgress } from "@/app/firebase/services/libraryServices"
+import { updateBookProgress } from "@/app/firebase/services/libraryServices";
 
 export default function ProgressBar({ playerInfo }: { playerInfo: any }) {
   const user = useSelector((state: RootState) => state.AuthState.user);
   const { currentTime } = useSelector(
     (state: RootState) => state.AudioBookPlayer
   );
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const duration = useAudioDuration(playerInfo.audioLink);
   const progressPercent = duration > 0 ? (currentTime / duration) * 100 : 0;
-  const [seeking, setSeeking] = useState(false)
-  const [tempTime, setTempTime] = useState(0) 
+  const [seeking, setSeeking] = useState(false);
+  const [tempTime, setTempTime] = useState(0);
   const isFinished = progressPercent >= 99.9;
-  
-  
-  const handleSeeking = () =>{
-    setSeeking(true)
-  }
+
+  const handleSeeking = () => {
+    setSeeking(true);
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newTime = parseFloat(e.target.value)
-    setTempTime(newTime)
-  }
+    const newTime = parseFloat(e.target.value);
+    setTempTime(newTime);
+  };
 
   const handleSeekEnd = () => {
-    dispatch(userSeekTo(tempTime))
-    setSeeking(false)
-  }
-
- useEffect(() => {
-  const updateFirestoreBookProgress = async () => {
-    
-    if (!user || !playerInfo?.id) return;
-    
-    try {
-      console.log("💾 Saving progress:", progressPercent, "%", "Finished?", isFinished);
-      
-      await updateBookProgress(
-        user.uid,
-        playerInfo.id,
-        progressPercent,
-        isFinished
-      );
-
-    } catch (error) {
-      console.error("Failed to save progress:", error);
-    }
+    dispatch(userSeekTo(tempTime));
+    setSeeking(false);
   };
-  
- 
-  const shouldUpdate = 
-    progressPercent === 100 || 
-    Math.abs(progressPercent % 10) < 0.01 || 
-    isFinished;
-  
-  if (shouldUpdate) {
-    updateFirestoreBookProgress();
-  }
-}, [progressPercent, user, playerInfo?.id, isFinished]);
- 
-useEffect(() => {
-  console.log("🔍 DEBUG - Current state:", {
-    userExists: !!user,
-    userId: user?.uid,
-    bookId: playerInfo?.id,
-    progress: progressPercent,
-    isFinished,
-    // Check Firestore document exists
-    firestorePath: user && playerInfo?.id ? 
-      `users/${user.uid}/library/${playerInfo.id}` : 'N/A'
-  });
-}, [progressPercent]);
+
+  useEffect(() => {
+    const updateFirestoreBookProgress = async () => {
+      if (!user || !playerInfo?.id) return;
+
+      try {
+        await updateBookProgress(
+          user.uid,
+          playerInfo.id,
+          progressPercent,
+          isFinished
+        );
+      } catch (error) {
+        console.error("Failed to save progress:", error);
+      }
+    };
+
+    const shouldUpdate =
+      progressPercent === 100 ||
+      Math.abs(progressPercent % 10) < 0.01 ||
+      isFinished;
+
+    if (shouldUpdate) {
+      updateFirestoreBookProgress();
+    }
+  }, [progressPercent, user, playerInfo?.id, isFinished]);
 
   return (
     <div className="audio__progress--wrapper w-1/3 flex items-center gap-4">
       <div className="audio__time text-[#fff] text-sm">
-        {seeking? formatTime(tempTime) : formatTime(currentTime)}
+        {seeking ? formatTime(tempTime) : formatTime(currentTime)}
       </div>
       <input
         type="range"

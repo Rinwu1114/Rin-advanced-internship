@@ -1,4 +1,3 @@
-
 import SettingsSkeleton from "../components/LoadingComponents/SettingsSkeleton";
 
 export default function Loading() {

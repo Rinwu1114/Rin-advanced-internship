@@ -8,8 +8,10 @@ export default function Features() {
           <div className="md:text-3xl text-2xl text-[#032b41] text-center mb-8 font-bold">
             Understand books in few minutes
           </div>
-          <div className="flex grid grid-cols-1 gap-10 mb-24
-          md:grid-cols-3">
+          <div
+            className="flex grid grid-cols-1 gap-10 mb-24
+          md:grid-cols-3"
+          >
             <div className="flex flex-col items-center text-center">
               <div className="flex justify-center mb-2 fill-[#032b41]">
                 <AiFillFileText className="md:w-15 md:h-15 w-12 h-12 fill-[#032b41]" />

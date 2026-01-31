@@ -1,20 +1,21 @@
 import Image from "next/image";
-import landingimg from "../../../public/assets/landing.png"
+import landingimg from "../../../public/assets/landing.png";
 import LoginButton from "./PopUp/LoginButton";
 
 export default function LandingComponent() {
-
-
-
   return (
     <section id="landing">
       <div className="container mx-auto">
         <div className="row ">
           <div className="flex ">
-            <div className="md:w-full md:flex-row md:items-start md:text-left
-            flex-col items-center text-center max-w-[540px] mx-auto">
-              <div className="text-[#032b41] font-bold text-2xl w-full mb-6  
-              md:text-4xl">
+            <div
+              className="md:w-full md:flex-row md:items-start md:text-left
+            flex-col items-center text-center max-w-[540px] mx-auto"
+            >
+              <div
+                className="text-[#032b41] font-bold text-2xl w-full mb-6  
+              md:text-4xl"
+              >
                 Gain more knowledge <br className="hidden md:block" />
                 in less time
               </div>
@@ -27,9 +28,15 @@ export default function LandingComponent() {
               </div>
               <LoginButton />
             </div>
-            <figure className="w-full flex justify-end hidden
-            md:flex">
-              <Image src={landingimg} alt="logo" className="h-full w-full max-w-100" />
+            <figure
+              className="w-full flex justify-end hidden
+            md:flex"
+            >
+              <Image
+                src={landingimg}
+                alt="logo"
+                className="h-full w-full max-w-100"
+              />
             </figure>
           </div>
         </div>

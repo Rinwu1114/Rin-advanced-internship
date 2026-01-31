@@ -13,7 +13,6 @@ import TrackInfo from "./TrackInfo";
 import AudioControls from "./Controls";
 import ProgressBar from "./ProgressBar";
 
-
 export default function AudioPlayer({ playerInfo }: { playerInfo: any }) {
   const audioRef = useRef<HTMLAudioElement>(null);
   const dispatch = useDispatch();
@@ -51,7 +50,7 @@ export default function AudioPlayer({ playerInfo }: { playerInfo: any }) {
       dispatch(setDuration(audio.duration));
     };
     const handleEnded = () => {
-      dispatch(stop()), dispatch(updateProgress(0));
+      (dispatch(stop()), dispatch(updateProgress(0)));
     };
 
     audio.addEventListener("timeupdate", handleTimeUpdate);
@@ -98,7 +97,7 @@ export default function AudioPlayer({ playerInfo }: { playerInfo: any }) {
       </audio>
       <TrackInfo playerInfo={playerInfo} />
       <AudioControls />
-      <ProgressBar playerInfo={playerInfo}/>
+      <ProgressBar playerInfo={playerInfo} />
     </div>
   );
 }

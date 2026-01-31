@@ -1,31 +1,31 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface OpenState {
-    isOpen: boolean
-    mode: 'login' | 'signup' | 'reset'
+  isOpen: boolean;
+  mode: "login" | "signup" | "reset";
 }
 
 const initialState: OpenState = {
-    isOpen: false,
-    mode: 'login'
-}
+  isOpen: false,
+  mode: "login",
+};
 
 export const popUpSlice = createSlice({
-   name: 'popUp',
-   initialState,
-   reducers: {
+  name: "popUp",
+  initialState,
+  reducers: {
     openPopUp: (state) => {
-        state.isOpen = true
-    }, 
+      state.isOpen = true;
+    },
     closePopUp: (state) => {
-        state.isOpen = false
+      state.isOpen = false;
     },
     switchMode: (state, action: PayloadAction<OpenState["mode"]>) => {
-        state.mode = action.payload
-    }
-   }
-})
+      state.mode = action.payload;
+    },
+  },
+});
 
-export const { openPopUp, closePopUp, switchMode } = popUpSlice.actions
+export const { openPopUp, closePopUp, switchMode } = popUpSlice.actions;
 
-export default popUpSlice.reducer
+export default popUpSlice.reducer;

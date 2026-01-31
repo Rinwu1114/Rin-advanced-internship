@@ -17,48 +17,47 @@ export const createOrUpdateUserProfile = async (userData: {
       { merge: true }
     );
   } catch (error) {
-    throw error
+    throw error;
   }
 };
 
 export const getUserProfile = async (userId: string) => {
-    try {
-        const docRef = doc(db, "users", userId)
-        const docSnap = await getDoc(docRef)
-    
-        if (docSnap.exists()){
-            return docSnap.data()
-        }
-        return null
+  try {
+    const docRef = doc(db, "users", userId);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      return docSnap.data();
     }
-    catch (error) {
-        console.error("Error getting user profile", error)
-        return null
-    }
-}
+    return null;
+  } catch (error) {
+    console.error("Error getting user profile", error);
+    return null;
+  }
+};
 
 export const upgradeToPremium = async (userId: string) => {
-    try {
-        await updateDoc(doc(db, "users", userId),{
-            plan: 'Premium',
-            upgradedAt: new Date().toISOString()
-        })
-        return true
-    } catch (error) {
-        console.error("Error upgrading user", error)
-        return false
-    }
-}
+  try {
+    await updateDoc(doc(db, "users", userId), {
+      plan: "Premium",
+      upgradedAt: new Date().toISOString(),
+    });
+    return true;
+  } catch (error) {
+    console.error("Error upgrading user", error);
+    return false;
+  }
+};
 
 export const upgradeToPremiumPlus = async (userId: string) => {
-    try {
-        await updateDoc(doc(db, "users", userId),{
-            plan: 'Premium-Plus',
-            upgradedAt: new Date().toISOString()
-        })
-        return true
-    } catch (error) {
-        console.error("Error upgrading user", error)
-        return false
-    }
-}
+  try {
+    await updateDoc(doc(db, "users", userId), {
+      plan: "Premium-Plus",
+      upgradedAt: new Date().toISOString(),
+    });
+    return true;
+  } catch (error) {
+    console.error("Error upgrading user", error);
+    return false;
+  }
+};

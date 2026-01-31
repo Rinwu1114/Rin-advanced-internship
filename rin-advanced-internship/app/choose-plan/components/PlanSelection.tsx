@@ -22,11 +22,6 @@ export default function PlanSelection() {
     monthly: "price_1Sv4Q7I5ygUw90U3DyK4cikg",
   };
 
-
-console.log(user)
-
-
-
   const handlePayment = async () => {
     if (!user) {
       dispatch(openPopUp()); 

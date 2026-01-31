@@ -30,19 +30,19 @@ export const AudioSlice = createSlice({
     skipForward: (state, action: PayloadAction<number>) => {
       const sec = action.payload ?? 10;
       let newTime = state.currentTime + sec;
-      if (state.duration > 0){
-        newTime = Math.min(newTime, state.duration)
+      if (state.duration > 0) {
+        newTime = Math.min(newTime, state.duration);
       }
       state.currentTime = Math.max(0, newTime);
     },
     Rewind: (state, action: PayloadAction<number>) => {
-      const sec = action.payload ?? 10; 
+      const sec = action.payload ?? 10;
       const newTime = state.currentTime - sec;
       state.currentTime = Math.max(0, newTime);
     },
     stop: (state) => {
-        state.isPlaying = false;
-    }
+      state.isPlaying = false;
+    },
   },
 });
 
@@ -53,7 +53,7 @@ export const {
   Rewind,
   updateProgress,
   setDuration,
-  stop
+  stop,
 } = AudioSlice.actions;
 
-export default AudioSlice.reducer
+export default AudioSlice.reducer;

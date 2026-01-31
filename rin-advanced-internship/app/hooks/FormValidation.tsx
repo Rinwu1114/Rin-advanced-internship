@@ -14,9 +14,9 @@ export const formValidation = () => {
   };
 
   const vaildateOnlyEmail = (email: string): number => {
-    if (!!email && !email.includes("@")) return 1
-    return 0
-  }
+    if (!!email && !email.includes("@")) return 1;
+    return 0;
+  };
 
   const validateBoth = (email: string, password: string): number => {
     const hasEmail = !!email;
@@ -37,6 +37,6 @@ export const formValidation = () => {
     validateBoth,
     formSuccessCode,
     setFormSuccessCode,
-    vaildateOnlyEmail
+    vaildateOnlyEmail,
   };
 };

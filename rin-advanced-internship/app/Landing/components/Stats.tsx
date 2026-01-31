@@ -33,7 +33,6 @@ export default function Stats() {
     <section id="stats">
       <div className="w-full mx-auto pt-0 pb-10">
         <div className="row">
-
           <div
             className="flex flex-col gap-8 md:gap-20 mb-8 md:mb-28 last:mb-0
           md:flex-row"
@@ -139,10 +138,14 @@ export default function Stats() {
                 </div>
               </div>
             </div>
-            <div className="w-full flex flex-col justify-center gap-8 md:gap-5 mb-28 last:mb-0
-          md:flex-row">
-              <div className="w-full flex flex-col justify-center items-start md:items-end text-right
-              ">
+            <div
+              className="w-full flex flex-col justify-center gap-8 md:gap-5 mb-28 last:mb-0
+          md:flex-row"
+            >
+              <div
+                className="w-full flex flex-col justify-center items-start md:items-end text-right
+              "
+              >
                 {heading2.map((heading2, index) => (
                   <div
                     key={index}
@@ -164,5 +167,3 @@ export default function Stats() {
     </section>
   );
 }
-
-

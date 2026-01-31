@@ -36,12 +36,12 @@ export default function ResetPassword() {
       setFormErrorCode(errorCode);
       return;
     }
-    isLoading(true)
+    isLoading(true);
     try {
       const result = await dispatch(resetPassword(email));
       if (resetPassword.fulfilled.match(result)) {
         setFormSuccessCode(2); // email sent
-        isLoading(false)
+        isLoading(false);
         setTimeout(() => {
           dispatch(switchMode("login"));
         }, 2000);
@@ -49,15 +49,15 @@ export default function ResetPassword() {
         const error = result.error;
         if (error?.message?.includes("user-not-found")) {
           setFormErrorCode(9);
-          isLoading(false)
+          isLoading(false);
         } else {
           setFormErrorCode(10);
-          isLoading(false)
+          isLoading(false);
         }
       }
     } catch (error) {
       setFormErrorCode(10);
-      isLoading(false)
+      isLoading(false);
     }
   };
 
@@ -78,9 +78,13 @@ export default function ResetPassword() {
           onChange={(e) => setEmail(e.target.value)}
         />
         <button className="btn flex justify-center" onClick={handleReset}>
-          {loading?<span className="animate-spin">
-                      <LoadingSpinner />
-                    </span>: <span>Sent reset password link</span> }
+          {loading ? (
+            <span className="animate-spin">
+              <LoadingSpinner />
+            </span>
+          ) : (
+            <span>Sent reset password link</span>
+          )}
         </button>
       </form>
 

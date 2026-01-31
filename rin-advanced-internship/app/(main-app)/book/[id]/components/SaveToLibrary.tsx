@@ -10,7 +10,6 @@ import { CiBookmark } from "react-icons/ci";
 import { IoBookmark } from "react-icons/io5";
 
 export default function SaveToLibrary({ bookInfo }: { bookInfo: any }) {
-
   const user = useSelector((state: RootState) => state.AuthState.user);
   const dispatch = useDispatch();
 

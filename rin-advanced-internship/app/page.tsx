@@ -5,9 +5,9 @@ import Footer from "./(main-app)/components/Footer";
 export default function Main() {
   return (
     <>
-    <Nav />
-    <Landing />
-    <Footer />
+      <Nav />
+      <Landing />
+      <Footer />
     </>
   );
 }

@@ -183,7 +183,7 @@ export default function Login() {
               <LoadingSpinner />
             </span>
           ) : (
-           <span>Login</span>
+            <span>Login</span>
           )}
         </button>
       </form>

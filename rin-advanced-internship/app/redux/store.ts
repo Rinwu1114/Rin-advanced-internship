@@ -1,24 +1,24 @@
-import { configureStore } from '@reduxjs/toolkit'
-import loginPopUpReducer from './slices/loginSlice';
-import activeReducer from './slices/activeSlice';
-import audio from './slices/audioPlayerSlice'
-import SizeSlice from './slices/activeSize';
-import PlanSlice from './slices/activePlan';
-import Auth from './slices/authState';
+import { configureStore } from "@reduxjs/toolkit";
+import loginPopUpReducer from "./slices/loginSlice";
+import activeReducer from "./slices/activeSlice";
+import audio from "./slices/audioPlayerSlice";
+import SizeSlice from "./slices/activeSize";
+import PlanSlice from "./slices/activePlan";
+import Auth from "./slices/authState";
 
 export const makeStore = () => {
-    return configureStore({
-        reducer: {
-            loginPopUp: loginPopUpReducer,
-            ActiveTab: activeReducer,
-            ActiveSize: SizeSlice,
-            ActivePlan: PlanSlice,
-            AudioBookPlayer: audio,
-            AuthState: Auth,
-        },
-    });
-}
+  return configureStore({
+    reducer: {
+      loginPopUp: loginPopUpReducer,
+      ActiveTab: activeReducer,
+      ActiveSize: SizeSlice,
+      ActivePlan: PlanSlice,
+      AudioBookPlayer: audio,
+      AuthState: Auth,
+    },
+  });
+};
 
-export type AppStore = ReturnType<typeof makeStore>
-export type RootState = ReturnType<AppStore['getState']>;
-export type AppDispatch = AppStore['dispatch'];
+export type AppStore = ReturnType<typeof makeStore>;
+export type RootState = ReturnType<AppStore["getState"]>;
+export type AppDispatch = AppStore["dispatch"];

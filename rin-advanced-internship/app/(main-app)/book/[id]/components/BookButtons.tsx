@@ -17,7 +17,7 @@ export default function BookButtons({ bookInfo }: { bookInfo: any }) {
       dispatch(openPopUp());
       return;
     }
-    if (user?.plan === "Basic" && bookInfo.subscriptionRequired === true ) {
+    if (user?.plan === "Basic" && bookInfo.subscriptionRequired === true) {
       router.push(`/choose-plan`);
       return;
     } else {
