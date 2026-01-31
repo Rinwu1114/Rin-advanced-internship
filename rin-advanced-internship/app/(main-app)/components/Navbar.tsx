@@ -1,7 +1,15 @@
+"use client"
+import { useDispatch } from "react-redux";
+import type { AppDispatch } from "@/app/redux/store";
+import { openPopUp } from "@/app/redux/slices/loginSlice";
 import Image from "next/image";
 import logo from "@/public/assets/logo.png";
 
 export default function Nav() {
+    const dispatch = useDispatch<AppDispatch>();
+    const handleLogin = () => {
+      dispatch(openPopUp())
+    }
   return (
     <nav className="h-20">
       <div className="flex justify-between items-center h-full max-w-[1070px] w-full mx-auto px-6">
@@ -9,8 +17,8 @@ export default function Nav() {
           <Image src={logo} alt="logo" className="h-full w-full" />
         </figure>
         <ul className="flex gap-6">
-          <li className="text-[#032b41] cursor-pointer transition-colors duration-100 hover:text-[#2bd97c] --login">
-            Login
+          <li className="text-[#032b41] cursor-pointer transition-colors duration-100 hover:text-[#2bd97c] --login"
+          onClick={handleLogin}>            Login
           </li>
           <li
             className="text-[#032b41] cursor-not-allowed transition-colors duration-100 hover:text-[#2bd97c]
