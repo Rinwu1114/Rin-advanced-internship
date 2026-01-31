@@ -42,8 +42,6 @@ export default function ProgressBar({ playerInfo }: { playerInfo: any }) {
     if (!user || !playerInfo?.id) return;
     
     try {
-      console.log("💾 Saving progress:", progressPercent, "%", "Finished?", isFinished);
-      
       await updateBookProgress(
         user.uid,
         playerInfo.id,
@@ -66,19 +64,6 @@ export default function ProgressBar({ playerInfo }: { playerInfo: any }) {
     updateFirestoreBookProgress();
   }
 }, [progressPercent, user, playerInfo?.id, isFinished]);
- 
-useEffect(() => {
-  console.log("🔍 DEBUG - Current state:", {
-    userExists: !!user,
-    userId: user?.uid,
-    bookId: playerInfo?.id,
-    progress: progressPercent,
-    isFinished,
-    // Check Firestore document exists
-    firestorePath: user && playerInfo?.id ? 
-      `users/${user.uid}/library/${playerInfo.id}` : 'N/A'
-  });
-}, [progressPercent]);
 
   return (
     <div className="audio__progress--wrapper w-1/3 flex items-center gap-4">

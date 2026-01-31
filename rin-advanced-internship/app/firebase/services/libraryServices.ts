@@ -35,7 +35,6 @@ export const addBookToLibrary = async (
             libraryBook,
             { merge: true}
         )
-        console.log("book added", bookData.title)
         return { sucess: true}
     } catch (error) {
         console.error("error adding to library", error)
@@ -104,7 +103,6 @@ export const updateBookProgress = async (
         
         const currentProgress = existingData?.progress || 0;
         if (progress < currentProgress && progress < 100) {
-            console.log("Progress decreased, skipping update");
             return { success: true };
         }
         
@@ -123,16 +121,11 @@ export const updateBookProgress = async (
         
         await updateDoc(bookRef, updates);
         
-        console.log("✅ Progress updated:", { 
-            bookId: id, 
-            progress, 
-            finished: shouldBeFinished 
-        });
         
         return { success: true };
         
     } catch (error: any) {
-        console.error("❌ updateBookProgress error:", error);
+        console.error("UpdateBookProgress error:", error);
         return {
             success: false,
             error: error.message || "Unknown error"
