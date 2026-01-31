@@ -10,13 +10,19 @@ export const createCheckoutSession = async (
   uid: string,
   priceId: string
 ): Promise<void> => {
+  // Resolve an origin safely (avoid `window` on the server)
+  const origin =
+    typeof window !== "undefined"
+      ? window.location.origin
+      : process.env.NEXT_PUBLIC_APP_URL || "";
+
   // 1. Create a doc in the user's checkout_sessions subcollection
   const docRef = await addDoc(
     collection(db, "users", uid, "checkout_sessions"),
     {
       price: priceId,
-      success_url: window.location.origin,
-      cancel_url: window.location.origin,
+      success_url: origin,
+      cancel_url: origin,
     }
   );
 
@@ -30,7 +36,11 @@ export const createCheckoutSession = async (
       const error = data.error as { message: string } | undefined;
 
       if (url) {
-        window.location.assign(url);
+        if (typeof window !== "undefined") {
+          window.location.assign(url);
+        } else {
+          console.warn("Redirect URL received on server; skipping client redirect.", url);
+        }
       }
       if (error) {
         console.error(`Stripe error: ${error.message}`);
