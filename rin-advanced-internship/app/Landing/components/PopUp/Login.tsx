@@ -20,7 +20,9 @@ import LoadingSpinner from "@/app/(main-app)/components/LoadingComponents/Loadin
 
 export default function Login() {
   const dispatch = useDispatch<AppDispatch>();
-  const [loading, isLoading] = useState(false);
+  const [guestLoading, isGuestLoading] = useState(false);
+  const [googleLoading, isGoogleLoading] = useState(false);
+  const [emailLoading, isEmailLoading] = useState(false);
   const router = useRouter();
   const switchToSignUp = () => {
     dispatch(switchMode("signup"));
@@ -44,7 +46,7 @@ export default function Login() {
       setFormErrorCode(errorCode);
       return;
     }
-    isLoading(true);
+    isEmailLoading(true);
     try {
       const result = await dispatch(loginUser({ email, password }));
       if (loginUser.fulfilled.match(result)) {
@@ -54,16 +56,16 @@ export default function Login() {
       }
       if (!loginUser.fulfilled.match(result)) {
         setFormErrorCode(4);
-        isLoading(false);
+        isEmailLoading(false);
       }
     } catch (error) {
       setFormErrorCode(5);
-      isLoading(false);
+      isEmailLoading(false);
     }
   };
 
   const handleGoogleLogin = async () => {
-    isLoading(true);
+    isGoogleLoading(true);
     try {
       const result = await dispatch(loginGoogle());
       if (loginGoogle.fulfilled.match(result)) {
@@ -72,13 +74,13 @@ export default function Login() {
         router.push("/for-you");
       }
     } catch (error) {
-      isLoading(false);
+      isGoogleLoading(false);
       console.error("Problem logging in with Google:", error);
     }
   };
 
   const handleGuestLogin = async () => {
-    isLoading(true);
+    isGuestLoading(true);
     try {
       const result = await dispatch(loginGuest());
       if (loginGuest.fulfilled.match(result)) {
@@ -91,7 +93,7 @@ export default function Login() {
         router.push("/for-you");
       }
     } catch (error) {
-      isLoading(false);
+      isGuestLoading(false);
     }
   };
 
@@ -114,7 +116,7 @@ export default function Login() {
         >
           <MdPerson className="w-8 h-8" />
         </figure>
-        {loading ? (
+        {guestLoading ? (
           <span className="animate-spin">
             <LoadingSpinner />
           </span>
@@ -143,7 +145,7 @@ export default function Login() {
         >
           <FcGoogle className="w-7 h-7" />
         </figure>
-        {loading ? (
+        {googleLoading ? (
           <span className="animate-spin">
             <LoadingSpinner />
           </span>
@@ -178,7 +180,7 @@ export default function Login() {
           onChange={(e) => setPassword(e.target.value)}
         />
         <button className="btn flex justify-center" onClick={handleEmailLogin}>
-          {loading ? (
+          {emailLoading ? (
             <span className="animate-spin">
               <LoadingSpinner />
             </span>

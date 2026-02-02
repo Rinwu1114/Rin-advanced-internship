@@ -8,7 +8,6 @@ export default function Sidebar() {
   const dispatch = useDispatch();
   type StoreState = ReturnType<ReturnType<typeof makeStore>["getState"]>;
   const menuOpen = useSelector((state: StoreState) => state.MenuState.menuOpen);
-console.log(menuOpen)
   return (
     <>
       <div
