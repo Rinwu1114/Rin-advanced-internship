@@ -1,7 +1,7 @@
 export default function TrackInfo({ playerInfo }: { playerInfo: any }) {
   return (
     <div
-      className="audio__track--wrapper w-1/3 flex gap-3 items-center
+      className="audio__track--wrapper md:w-1/3 w-full flex gap-3 items-center
                 justify-center"
     >
       <figure className="audio__track--img-mask flex max-w-12">

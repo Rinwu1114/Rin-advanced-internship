@@ -29,7 +29,7 @@ export default function AudioControls() {
     dispatch(Rewind(10));
   };
   return (
-    <div className="audio__controls--wrapper w-1/3">
+    <div className="audio__controls--wrapper md:w-1/3 w-full">
       <div className="audio__controls flex items-center justify-center gap-6">
         <button className="controls__btn rounded-[50%] cursor-pointer">
           <MdOutlineReplay10

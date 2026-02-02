@@ -62,7 +62,7 @@ export default function ProgressBar({ playerInfo }: { playerInfo: any }) {
   }, [progressPercent, user, playerInfo?.id, isFinished]);
 
   return (
-    <div className="audio__progress--wrapper w-1/3 flex items-center gap-4">
+    <div className="audio__progress--wrapper md:w-1/3 w-full justify-center flex items-center gap-4">
       <div className="audio__time text-[#fff] text-sm">
         {seeking ? formatTime(tempTime) : formatTime(currentTime)}
       </div>

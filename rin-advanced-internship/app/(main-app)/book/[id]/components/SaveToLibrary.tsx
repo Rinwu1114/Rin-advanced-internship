@@ -53,7 +53,7 @@ export default function SaveToLibrary({ bookInfo }: { bookInfo: any }) {
           <div className="bookmark__icon flex">
             <CiBookmark className="w-5 h-5" />
           </div>
-          <div className="bookmark__text" onClick={handleAddBook}>
+          <div className="bookmark__text md:text-[18px] text-[16px]" onClick={handleAddBook}>
             Add title to My Library
           </div>
         </div>

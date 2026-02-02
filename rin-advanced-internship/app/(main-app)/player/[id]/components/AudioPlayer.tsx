@@ -89,8 +89,8 @@ export default function AudioPlayer({ playerInfo }: { playerInfo: any }) {
 
   return (
     <div
-      className="audio__wrapper w-full h-20 mt-auto flex items-center
-        justify-between bg-[#042330] px-10 fixed bottom-0 left-0 z-80"
+      className="audio__wrapper w-full md:h-20 h-45 mt-auto md:flex-row flex flex-col items-center
+        justify-between bg-[#042330] md:px-10 md:py-0 px-6 py-4 fixed bottom-0 left-0 z-80"
     >
       <audio ref={audioRef} src={playerInfo.audioLink} preload="metadata">
         {" "}

@@ -25,10 +25,10 @@ export default function textSize() {
             className={
               active === "sm"
                 ? " flex items-center justify-center w-8 h-8 border-b-[3px] border-b-[#2bd97c]"
-                : "flex items-center justify-center w-8 h-8"
+                : "flex items-center justify-center w-8 h-8 "
             }
           >
-            <IoTextOutline className="w-5 h-5 text-[#032b41]" />
+            <IoTextOutline className="w-5 h-5 text-[#032b41] md:cursor-pointer cursor-not-allowed" />
           </div>
           <div
             onClick={() => dispatch(setActiveSize("md"))}
@@ -38,7 +38,7 @@ export default function textSize() {
                 : "flex items-center justify-center w-8 h-8"
             }
           >
-            <IoTextOutline className="w-6 h-6 text-[#032b41]" />
+            <IoTextOutline className="w-6 h-6 text-[#032b41] md:cursor-pointer cursor-not-allowed" />
           </div>
           <div
             onClick={() => dispatch(setActiveSize("lg"))}
@@ -48,7 +48,7 @@ export default function textSize() {
                 : "flex items-center justify-center w-8 h-8"
             }
           >
-            <IoTextOutline className="w-7 h-7 text-[#032b41]" />
+            <IoTextOutline className="w-7 h-7 text-[#032b41] md:cursor-pointer cursor-not-allowed" />
           </div>
           <div
             onClick={() => dispatch(setActiveSize("xl"))}
@@ -58,7 +58,7 @@ export default function textSize() {
                 : "flex items-center justify-center w-8 h-8"
             }
           >
-            <IoTextOutline className="w-8 h-8 text-[#032b41]" />
+            <IoTextOutline className="w-8 h-8 text-[#032b41] md:cursor-pointer cursor-not-allowed" />
           </div>
         </>
       )}

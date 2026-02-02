@@ -12,10 +12,10 @@ export default function BookInfo({ bookInfo }: { bookInfo: any }) {
     <div className="book__wrapper flex max-[1000px]:gap-4 gap-8 max-[1000px]:flex-col flex-row">
       <div className="book w-full max-[1000px]:order-1">
         <BookTitle bookInfo={bookInfo} />
-        <div className="book__author text-[#032b41] mb-4 font-semibold ">
+        <div className="book__author text-[#032b41] md:text-[16px] text-[14px] mb-4 font-semibold ">
           {bookInfo.author}
         </div>
-        <div className="book__sub-title text-[#032b41] mb-4 font-light text-xl">
+        <div className="book__sub-title text-[#032b41] mb-4 text-[lg] font-light md:text-xl">
           {bookInfo.subTitle}
         </div>
         <div className="inner__wrapper py-4 mb-6 border-y border-[#e1e7ea]">
@@ -83,13 +83,13 @@ export default function BookInfo({ bookInfo }: { bookInfo: any }) {
             </div>
           ))}
         </div>
-        <div className="book__description text-[#032b41] mb-4 leading-[1.5]">
+        <div className="book__description md:text-[16px] text-[14px] text-[#032b41] mb-4 leading-[1.5]">
           {bookInfo.bookDescription}
         </div>
         <div className="book__about text-lg text-[#032b41] mb-4 font-semibold">
           About the author
         </div>
-        <div className="book__about--description text-[#032b41] leading-[1.5]">
+        <div className="book__about--description md:text-[16px] text-[14px] text-[#032b41] leading-[1.5]">
           {bookInfo.authorDescription}
         </div>
       </div>
