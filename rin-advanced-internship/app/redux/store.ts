@@ -5,6 +5,7 @@ import audio from "./slices/audioPlayerSlice";
 import SizeSlice from "./slices/activeSize";
 import PlanSlice from "./slices/activePlan";
 import Auth from "./slices/authState";
+import Menu from "./slices/menuSlice"
 
 export const makeStore = () => {
   return configureStore({
@@ -15,6 +16,7 @@ export const makeStore = () => {
       ActivePlan: PlanSlice,
       AudioBookPlayer: audio,
       AuthState: Auth,
+      MenuState: Menu
     },
   });
 };
